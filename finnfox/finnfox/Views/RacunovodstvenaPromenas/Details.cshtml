@@ -1,0 +1,50 @@
+﻿@model finnfox.RacunovodstvenaPromena
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RacunovodstvenaPromena</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser.UserLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.UserLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipRacunovodstvenePromene.NazivTipa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipRacunovodstvenePromene.NazivTipa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NazivPromene)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NazivPromene)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatumPromene)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatumPromene)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PromenaId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
