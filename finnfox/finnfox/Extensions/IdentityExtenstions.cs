@@ -14,5 +14,11 @@ namespace finnfox.Extensions
             var claim = ((ClaimsIdentity)identity).FindFirst("UserLastName");
             return (claim != null) ? claim.Value : string.Empty;
         }
+
+        public static string GetUserId(this IIdentity identity)
+        {
+            var claim = ((ClaimsIdentity)identity).FindFirst("UserID");
+            return (claim != null) ? claim.Value : string.Empty;
+        }
     }
 }
