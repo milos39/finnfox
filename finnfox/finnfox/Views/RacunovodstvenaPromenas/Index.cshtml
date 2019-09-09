@@ -4,51 +4,186 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div ng-app="racunovodstvenePromene">
+    <div id="ctrl-wrapper" ng-controller="racunovodstvenePromeneController">
+        <h2 id="godina-naslov">Kompletna finansijska istorija</h2>
+        <p>@Html.ActionLink("Kreiraj novu promenu", "Create")</p>
+        <button class="btn btn-primary" id="updateTable">
+            update table
+            </button>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationUser.UserLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipRacunovodstvenePromene.NazivTipa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NazivPromene)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DatumPromene.Date)
-        </th>
-        <th></th>
-    </tr>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="godineUsistemu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                godine
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="godineUsistemu" id="godine-dropdown">
+                <li ng-repeat="godina in promenePoGodini.godine"><a class="{{godina}}" href="#">{{godina}}</a></li>
+                <li><a class="0" href="#">sve</a></li>
+            </ul>
 
-   
+        </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationUser.UserLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipRacunovodstvenePromene.NazivTipa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NazivPromene)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DatumPromene.Date)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PromenaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PromenaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PromenaId })
-        </td>
-    </tr>
-    
+        <table id="promeneTabela"
+               data-search="true"
+               data-show-columns="true"
+               locale="hr-HR">
+            <thead>
+                <tr>
+                    <th data-field="DatumPromene">datum</th>
+                    <th data-field="TipRacunovodstvenePromene">tip promene</th>
+                    <th data-field="NazivPromene">naziv promene</th>
+                    <th data-field="KolicinaNovca">vrednost</th>
+                </tr>
+            </thead>
+            @*<tbody>
+                    <tr ng-repeat="promena in promenePoGodini.racunovodstvenePromene">
+                        <td>{{promena.DatumPromene}}</td>
+                        <td>{{promena.TipRacunovodstvenePromene}}</td>
+                        <td>{{promena.NazivPromene}}</td>
+                        <td>{{promena.KolicinaNovca}}</td>
+                    </tr>
+                </tbody>*@
+
+        </table>
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <canvas id="myChart" width="200" height="200"></canvas>
+            </div>
+            
+        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @*<table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ApplicationUser.UserLastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipRacunovodstvenePromene.NazivTipa)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NazivPromene)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DatumPromene.Date)
+                    </th>
+                    <th></th>
+                </tr>
+
+
+
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationUser.UserLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipRacunovodstvenePromene.NazivTipa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NazivPromene)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DatumPromene.Date)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.PromenaId }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.PromenaId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.PromenaId })
+                    </td>
+                </tr>
+
+            }
+
+            </table>*@
+    </div>
+</div>
+
+@section Scripts {
+
+<script>
+    $("#updateTable").click(function () {
+        $.get("http://localhost:1091/RacunovodstvenaPromenas/pieChart?godina=2019", function (data, status) {
+            console.log(data);
+
+            var ctx = document.getElementById('myChart');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.nasloviSaProcentima,
+                    datasets: [{
+                        label: 'Udeo troškova u ukupnim primanjima',
+                        data: data.kolicineNovcaPoTipu,
+                        backgroundColor: [
+                            '#0060df',
+                            '#ff9f40',
+                            '#ff6384',
+                            '#4bc0c0',
+                            '#ffe900',
+                            '#ff0039',
+                            '#a1ff66'
+                        ]
+                    }]
+                },
+                options: {
+                }
+            });
+        });
+        //$("#promeneTabela").bootstrapTable({
+        //data-toggle: "table"
+        //locale: "hr-HR",
+        //data-search: "true",
+        //data-show-columns: "true"
+        //});
+        //$("#promeneTabela").bootstrapTable({});
+
+    });
+</script>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/angular")
+@Scripts.Render("~/bundles/bs-table")
+@Scripts.Render("~/bundles/chart")
+
+
+@*<script>
+var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: 'Udeo troškova u ukupnim primanjima',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    '#0060df',
+                    '#ff9f40',
+                    '#ff6384',
+                    '#4bc0c0',
+                    '#ffe900',
+                    '#ff0039'
+                ]
+            }]
+        },
+        options: {
+        }
+    });
+</script>*@
+
 }
 
-</table>

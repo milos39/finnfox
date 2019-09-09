@@ -22,3 +22,49 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.navbar-default {
+    background-color: #ff6464 !important;
+    border-color: #a55;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: transparent;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #fff;
+    background-color: transparent;
+}
+
+.nav-brand-img{
+    padding:5px 15px;
+}
+
+a {
+    color: #ff6464;
+}
+
+a:hover, a:focus {
+    color: #a55;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #ff6464;
+    border-color: #a55;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-group.open .dropdown-toggle.btn-primary {
+    background-color: #ee5c5c;
+    border-color: #a55;
+}
