@@ -513,14 +513,14 @@
     .datepicker table tr td.active.focus,
     .datepicker table tr td.active.highlighted.focus {
         color: #fff;
-        background-color: #286090;
+        background-color: #ff6464;
         border-color: #122b40;
     }
 
     .datepicker table tr td.active:hover,
     .datepicker table tr td.active.highlighted:hover {
         color: #fff;
-        background-color: #286090;
+        background-color: #ff6464;
         border-color: #204d74;
     }
 
@@ -529,7 +529,7 @@
     .datepicker table tr td.active.active,
     .datepicker table tr td.active.highlighted.active {
         color: #fff;
-        background-color: #286090;
+        background-color: #ff6464;
         border-color: #204d74;
     }
 
@@ -614,7 +614,7 @@
         .datepicker table tr td span.active.disabled.focus,
         .datepicker table tr td span.active.disabled:hover.focus {
             color: #fff;
-            background-color: #286090;
+            background-color: #ff6464;
             border-color: #122b40;
         }
 
@@ -623,7 +623,7 @@
         .datepicker table tr td span.active.disabled:hover,
         .datepicker table tr td span.active.disabled:hover:hover {
             color: #fff;
-            background-color: #286090;
+            background-color: #ff6464;
             border-color: #204d74;
         }
 
@@ -636,7 +636,7 @@
             .datepicker table tr td span.active.disabled.active,
             .datepicker table tr td span.active.disabled:hover.active {
                 color: #fff;
-                background-color: #286090;
+                background-color: #ff6464;
                 border-color: #204d74;
             }
 

@@ -28,6 +28,7 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
         if (kliknutaGodina.length == 4 || kliknutaGodina == 0) {
             console.log("uspeh jer je kliknut: " + kliknutaGodina + ' !');
             loadPromene(kliknutaGodina);
+            //drawOrUpdateChart(kliknutaGodina);
         } else {
             console.log("neuspeh jer je kliknut: " + kliknutaGodina);
             console.log(kliknutaGodina.length);
