@@ -12,8 +12,8 @@ namespace finnfox
     public partial class RacunovodstvenaPromena
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int PromenaId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int? PromenaId { get; set; }
 
         [Required]
         [StringLength(50)]

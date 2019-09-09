@@ -16,7 +16,7 @@ namespace finnfox
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TipPromeneId { get; set; }
 
         [Required]

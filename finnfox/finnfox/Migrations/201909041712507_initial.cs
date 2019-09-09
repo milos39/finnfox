@@ -11,7 +11,7 @@ namespace finnfox.Migrations
                 "dbo.RacunovodstvenaPromena",
                 c => new
                     {
-                        PromenaId = c.Int(nullable: false),
+                        PromenaId = c.Int(nullable: false, identity: true),
                         NazivPromene = c.String(nullable: false, maxLength: 50),
                         DatumPromene = c.DateTime(nullable: false),
                         TipPromeneId = c.Int(nullable: false),
@@ -24,7 +24,7 @@ namespace finnfox.Migrations
                 "dbo.TipRacunovodstvenePromene",
                 c => new
                     {
-                        TipPromeneId = c.Int(nullable: false),
+                        TipPromeneId = c.Int(nullable: false, identity: true),
                         NazivTipa = c.String(nullable: false, maxLength: 50),
                         PozitivnostTipa = c.Boolean(nullable: false),
                     })

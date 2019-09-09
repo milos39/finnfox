@@ -195,6 +195,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RacunovodstvenaPromenasController.cs" />
+    <Compile Include="Controllers\TipRacunovodstvenePromenesController.cs" />
     <Compile Include="Extensions\IdentityExtenstions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -214,6 +215,10 @@
     <Compile Include="Migrations\201909071730456_Dodata_KolicinaNovca_i_Valuta.cs" />
     <Compile Include="Migrations\201909071730456_Dodata_KolicinaNovca_i_Valuta.Designer.cs">
       <DependentUpon>201909071730456_Dodata_KolicinaNovca_i_Valuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909091533221_scaffold_synchronization.cs" />
+    <Compile Include="Migrations\201909091533221_scaffold_synchronization.Designer.cs">
+      <DependentUpon>201909091533221_scaffold_synchronization.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -302,6 +307,11 @@
     <Content Include="Views\RacunovodstvenaPromenas\Details.cshtml" />
     <Content Include="Views\RacunovodstvenaPromenas\Edit.cshtml" />
     <Content Include="Views\RacunovodstvenaPromenas\Index.cshtml" />
+    <Content Include="Views\TipRacunovodstvenePromenes\Create.cshtml" />
+    <Content Include="Views\TipRacunovodstvenePromenes\Delete.cshtml" />
+    <Content Include="Views\TipRacunovodstvenePromenes\Details.cshtml" />
+    <Content Include="Views\TipRacunovodstvenePromenes\Edit.cshtml" />
+    <Content Include="Views\TipRacunovodstvenePromenes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909071730456_Dodata_KolicinaNovca_i_Valuta.resx">
       <DependentUpon>201909071730456_Dodata_KolicinaNovca_i_Valuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909091533221_scaffold_synchronization.resx">
+      <DependentUpon>201909091533221_scaffold_synchronization.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
