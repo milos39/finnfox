@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -32,6 +33,24 @@ namespace finnfox.Controllers
                 var ukupanZbir = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
                 var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
                 double vrednostRacunaKategorija = 0;
+
+                if(ukupanZbir == 0)
+                {
+                    foreach (var kategorija in kategorije)
+                    {
+                        vrednostRacunaKategorija = db.RacunovodstvenaPromenas.Where(m => m.TipPromeneId == kategorija.TipPromeneId && m.DatumPromene.Year == godina && m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+
+                        
+                        viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa);
+                        viewModel.kolicineNovcaPoTipu.Add(vrednostRacunaKategorija);
+
+                        return Json(viewModel, JsonRequestBehavior.AllowGet);
+
+
+                    }
+                }
+
+                
 
 
                 foreach (var kategorija in kategorije)
@@ -170,12 +189,14 @@ namespace finnfox.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PromenaId,NazivPromene,DatumPromene,TipPromeneId,ApplicationUserId,KolicinaNovca")] RacunovodstvenaPromena racunovodstvenaPromena)
+        public ActionResult Create([Bind(Include = "NazivPromene,DatumPromene,TipPromeneId,ApplicationUserId,KolicinaNovca")] RacunovodstvenaPromena racunovodstvenaPromena)
         {
 
+            racunovodstvenaPromena.PromenaId = null;
             racunovodstvenaPromena.ApplicationUserId = User.Identity.GetUserId();
             ModelState.Remove("ApplicationUserId");
             ModelState.Remove("Valuta");
+            ModelState.Remove("PromenaId");
 
             try
             {
@@ -223,8 +244,10 @@ namespace finnfox.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PromenaId,NazivPromene,DatumPromene,TipPromeneId,ApplicationUserId")] RacunovodstvenaPromena racunovodstvenaPromena)
+        public ActionResult Edit([Bind(Include = "PromenaId,NazivPromene,DatumPromene,TipPromeneId,ApplicationUserId,KolicinaNovca")] RacunovodstvenaPromena racunovodstvenaPromena)
         {
+            racunovodstvenaPromena.ApplicationUserId = User.Identity.GetUserId();
+            ModelState.Remove("ApplicationUserId");
             if (ModelState.IsValid)
             {
                 db.Entry(racunovodstvenaPromena).State = EntityState.Modified;
