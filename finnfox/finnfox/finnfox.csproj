@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201909071730456_Dodata_KolicinaNovca_i_Valuta.Designer.cs">
       <DependentUpon>201909071730456_Dodata_KolicinaNovca_i_Valuta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909091533221_scaffold_synchronization.cs" />
+    <Compile Include="Migrations\201909091533221_scaffold_synchronization.Designer.cs">
+      <DependentUpon>201909091533221_scaffold_synchronization.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -331,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909071730456_Dodata_KolicinaNovca_i_Valuta.resx">
       <DependentUpon>201909071730456_Dodata_KolicinaNovca_i_Valuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909091533221_scaffold_synchronization.resx">
+      <DependentUpon>201909091533221_scaffold_synchronization.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
