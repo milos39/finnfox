@@ -70,7 +70,7 @@ namespace finnfox.Controllers
             else
             {
                 var ukupanZbir = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
-                var kategorije = db.TipRacunovodstvenePromenes.ToList();
+                var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
                 double vrednostRacunaKategorija = 0;
 
                 foreach (var kategorija in kategorije)
