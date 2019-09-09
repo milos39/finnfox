@@ -68,3 +68,13 @@ a:hover, a:focus {
     background-color: #ee5c5c;
     border-color: #a55;
 }
+
+.btn-primary a{
+    color:#fff;
+    text-decoration:none;
+}
+
+.btn-primary:hover a {
+    color: #fff;
+    text-decoration: none;
+}
