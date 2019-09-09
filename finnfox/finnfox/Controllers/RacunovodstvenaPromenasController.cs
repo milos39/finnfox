@@ -226,8 +226,10 @@ namespace finnfox.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PromenaId,NazivPromene,DatumPromene,TipPromeneId,ApplicationUserId")] RacunovodstvenaPromena racunovodstvenaPromena)
+        public ActionResult Edit([Bind(Include = "PromenaId,NazivPromene,DatumPromene,TipPromeneId,ApplicationUserId,KolicinaNovca")] RacunovodstvenaPromena racunovodstvenaPromena)
         {
+            racunovodstvenaPromena.ApplicationUserId = User.Identity.GetUserId();
+            ModelState.Remove("ApplicationUserId");
             if (ModelState.IsValid)
             {
                 db.Entry(racunovodstvenaPromena).State = EntityState.Modified;
