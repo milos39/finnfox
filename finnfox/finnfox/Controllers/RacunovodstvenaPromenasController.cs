@@ -205,7 +205,7 @@ namespace finnfox.Controllers
                 {
                     db.RacunovodstvenaPromenas.Add(racunovodstvenaPromena);
                     db.SaveChanges();
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index");
                 }
 
             }
