@@ -13,7 +13,7 @@ namespace finnfox
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PromenaId { get; set; }
+        public int? PromenaId { get; set; }
 
         [Required]
         [StringLength(50)]

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -170,12 +171,14 @@ namespace finnfox.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PromenaId,NazivPromene,DatumPromene,TipPromeneId,ApplicationUserId,KolicinaNovca")] RacunovodstvenaPromena racunovodstvenaPromena)
+        public ActionResult Create([Bind(Include = "NazivPromene,DatumPromene,TipPromeneId,ApplicationUserId,KolicinaNovca")] RacunovodstvenaPromena racunovodstvenaPromena)
         {
 
+            racunovodstvenaPromena.PromenaId = null;
             racunovodstvenaPromena.ApplicationUserId = User.Identity.GetUserId();
             ModelState.Remove("ApplicationUserId");
             ModelState.Remove("Valuta");
+            ModelState.Remove("PromenaId");
 
             try
             {
