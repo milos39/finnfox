@@ -34,6 +34,24 @@ namespace finnfox.Controllers
                 var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
                 double vrednostRacunaKategorija = 0;
 
+                if(ukupanZbir == 0)
+                {
+                    foreach (var kategorija in kategorije)
+                    {
+                        vrednostRacunaKategorija = db.RacunovodstvenaPromenas.Where(m => m.TipPromeneId == kategorija.TipPromeneId && m.DatumPromene.Year == godina && m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+
+                        
+                        viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa);
+                        viewModel.kolicineNovcaPoTipu.Add(vrednostRacunaKategorija);
+
+                        return Json(viewModel, JsonRequestBehavior.AllowGet);
+
+
+                    }
+                }
+
+                
+
 
                 foreach (var kategorija in kategorije)
                 {

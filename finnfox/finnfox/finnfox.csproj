@@ -195,6 +195,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RacunovodstvenaPromenasController.cs" />
+    <Compile Include="Controllers\TipRacunovodstvenePromenesController.cs" />
     <Compile Include="Extensions\IdentityExtenstions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -306,6 +307,11 @@
     <Content Include="Views\RacunovodstvenaPromenas\Details.cshtml" />
     <Content Include="Views\RacunovodstvenaPromenas\Edit.cshtml" />
     <Content Include="Views\RacunovodstvenaPromenas\Index.cshtml" />
+    <Content Include="Views\TipRacunovodstvenePromenes\Create.cshtml" />
+    <Content Include="Views\TipRacunovodstvenePromenes\Delete.cshtml" />
+    <Content Include="Views\TipRacunovodstvenePromenes\Details.cshtml" />
+    <Content Include="Views\TipRacunovodstvenePromenes\Edit.cshtml" />
+    <Content Include="Views\TipRacunovodstvenePromenes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
