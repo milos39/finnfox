@@ -60,11 +60,14 @@ namespace finnfox.Controllers
                 {
                     double procenat = (Usteda / ukupniPrihodi) * 100;
                     viewModel.nasloviSaProcentima.Add("Usteda - " + Math.Round(procenat, 2) + "%");
+                    viewModel.kolicineNovcaPoTipu.Add(Usteda);
                 }
                 else
                 {
                     double procenat =( (Usteda * -1) / ukupniPrihodi) * 100;
                     viewModel.nasloviSaProcentima.Add("Dugovanje - " + Math.Round(procenat, 2) + "%");
+                    viewModel.kolicineNovcaPoTipu.Add(Usteda);
+
                 }
 
 
