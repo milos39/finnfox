@@ -51,12 +51,12 @@ namespace finnfox.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "polje {0} je obavezno") ]
         [Display(Name = "Ime")]
         public string UserName{ get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
+        [Required(ErrorMessage = " polje {0} je obavezno")]
+        [DataType(DataType.Password,ErrorMessage = "⛔ Neispravni podaci za pristup, pokusajte ponovo")]
         [Display(Name = "Šifra")]
         public string Password { get; set; }
 
