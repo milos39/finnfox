@@ -30,11 +30,16 @@ namespace finnfox.Controllers
 
             if( godina > 0)
             {
-                var ukupanZbir = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+                var ukupniPrihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+                var ukupniRashodi  = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+
+                var Usteda = ukupniPrihodi - ukupniRashodi;
+                
+
                 var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
                 double vrednostRacunaKategorija = 0;
 
-                if(ukupanZbir == 0)
+                if(ukupniPrihodi == 0)
                 {
                     foreach (var kategorija in kategorije)
                     {
@@ -51,13 +56,24 @@ namespace finnfox.Controllers
                 }
 
                 
+                if(Usteda > 0)
+                {
+                    double procenat = (Usteda / ukupniPrihodi) * 100;
+                    viewModel.nasloviSaProcentima.Add("Usteda - " + Math.Round(procenat, 2) + "%");
+                }
+                else
+                {
+                    double procenat =( (Usteda * -1) / ukupniPrihodi) * 100;
+                    viewModel.nasloviSaProcentima.Add("Dugovanje - " + Math.Round(procenat, 2) + "%");
+                }
 
 
                 foreach (var kategorija in kategorije)
                 {
+                    
                     vrednostRacunaKategorija = db.RacunovodstvenaPromenas.Where(m => m.TipPromeneId == kategorija.TipPromeneId&& m.DatumPromene.Year == godina && m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
 
-                    double procenat = (vrednostRacunaKategorija / ukupanZbir) * 100;
+                    double procenat = (vrednostRacunaKategorija / ukupniPrihodi) * 100;
 
 
                     viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa + " - " + Math.Round(procenat,2) + "%");
