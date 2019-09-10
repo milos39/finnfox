@@ -196,7 +196,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RacunovodstvenaPromenasController.cs" />
     <Compile Include="Controllers\TipRacunovodstvenePromenesController.cs" />
+    <Compile Include="Extensions\EmailExtensionAttribute.cs" />
     <Compile Include="Extensions\IdentityExtenstions.cs" />
+    <Compile Include="Extensions\MembershipExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

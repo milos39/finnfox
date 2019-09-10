@@ -21,8 +21,10 @@ namespace finnfox
 
         [Required]
         [StringLength(50)]
+        [Display (Name ="Naziv tipa" )]
         public string NazivTipa { get; set; }
 
+        [Display(Name ="Prihod/Rashod")]
         public bool PozitivnostTipa { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
