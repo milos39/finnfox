@@ -242,6 +242,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Chart.css" />
     <Content Include="Content\images\finnfox-bg.png" />
+    <Content Include="Content\images\finnfox-bg50.png" />
     <Content Include="Content\images\finnfox404.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="favicon.ico" />
