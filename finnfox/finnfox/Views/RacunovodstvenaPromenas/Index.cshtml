@@ -7,10 +7,11 @@
 <div ng-app="racunovodstvenePromene">
     <div id="ctrl-wrapper" ng-controller="racunovodstvenePromeneController">
         <h2 id="godina-naslov">Kompletna finansijska istorija</h2>
-        <p>@Html.ActionLink("Kreiraj novu promenu", "Create")</p>
+        <span class="btn btn-primary">@Html.ActionLink("+ Kreiraj novu promenu", "Create")</span>
         <button class="btn btn-primary" id="updateTable">
             update table
-            </button>
+        </button>
+        <input type="number" id="godinaTest" />
 
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="godineUsistemu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -116,33 +117,90 @@
 @section Scripts {
 
 <script>
-    $("#updateTable").click(function () {
-        $.get("http://localhost:1091/RacunovodstvenaPromenas/pieChart?godina=2019", function (data, status) {
-            console.log(data);
+    var myChart;
+    function addData(chart, label, data) {
+        chart.data.labels.push(label);
+        chart.data.datasets[0].data = data;
+        chart.update();
+    }
 
-            var ctx = document.getElementById('myChart');
-            var myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: data.nasloviSaProcentima,
-                    datasets: [{
-                        label: 'Udeo troškova u ukupnim primanjima',
-                        data: data.kolicineNovcaPoTipu,
-                        backgroundColor: [
-                            '#0060df',
-                            '#ff9f40',
-                            '#ff6384',
-                            '#4bc0c0',
-                            '#ffe900',
-                            '#ff0039',
-                            '#a1ff66'
-                        ]
-                    }]
-                },
-                options: {
-                }
-            });
+    function removeData(chart) {
+        chart.data.labels = [];
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data = [];
         });
+        chart.update();
+    }
+
+
+    function drawOrUpdateChart(godina) {
+        $.get("http://localhost:1091/RacunovodstvenaPromenas/pieChart?godina=" + godina, function (data, status) {
+            
+            if ($("#myChart").hasClass("chartjs-render-monitor")) {
+                removeData(myChart);
+                addData(myChart, data.nasloviSaProcentima, data.kolicineNovcaPoTipu)
+            } else {
+                var ctx = document.getElementById('myChart');
+
+                if (data.nasloviSaProcentima.includes("ušteda")) {
+                        myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: data.nasloviSaProcentima,
+                            datasets: [{
+                                label: 'Udeo troškova u ukupnim primanjima',
+                                data: data.kolicineNovcaPoTipu,
+                                backgroundColor: [
+                                    '#0060df',
+                                    '#ff9f40',
+                                    '#ff6384',
+                                    '#4bc0c0',
+                                    '#ffe900',
+                                    '#ff0039',
+                                    '#a1ff66'
+                                ]
+                            }]
+                        },
+                        options: {
+
+                        }
+                    });
+                } else {
+                        myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.nasloviSaProcentima,
+                            datasets: [{
+                                label: 'Udeo troškova u ukupnim primanjima',
+                                data: data.kolicineNovcaPoTipu,
+                                backgroundColor: [
+                                    '#0060df',
+                                    '#ff9f40',
+                                    '#ff6384',
+                                    '#4bc0c0',
+                                    '#ffe900',
+                                    '#ff0039',
+                                    '#a1ff66'
+                                ]
+                            }]
+                        },
+                        options: {
+
+                        }
+                    });
+                }
+            }
+        });
+    };
+
+    $("#updateTable").click(function () {
+        var godinaTest = $("#godinaTest").val();
+        drawOrUpdateChart(godinaTest);
+            
+            
+    });
+
+
         //$("#promeneTabela").bootstrapTable({
         //data-toggle: "table"
         //locale: "hr-HR",
@@ -150,8 +208,7 @@
         //data-show-columns: "true"
         //});
         //$("#promeneTabela").bootstrapTable({});
-
-    });
+    
 </script>
 
 

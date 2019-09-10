@@ -17,10 +17,17 @@ namespace finnfox
 
         [Required]
         [StringLength(50)]
-        public string NazivPromene { get; set; }
+        [Display(Name = "Naziv promene")]
 
+        public string NazivPromene { get; set; }
+            
+        
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString ="{dd/MM/yy}")]
+        [Display(Name = "Datum promene")]
         public DateTime DatumPromene { get; set; }
 
+
+        [Display(Name = "Tip promene")]
         public int TipPromeneId { get; set; }
 
         public virtual TipRacunovodstvenePromene TipRacunovodstvenePromene { get; set; }
@@ -32,6 +39,7 @@ namespace finnfox
         public virtual ApplicationUser ApplicationUser { get; set; }
 
 
+        [Display(Name = "Kolicina novca")]
         public double KolicinaNovca { get; set; }
 
         public string Valuta { get; set; }
