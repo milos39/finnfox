@@ -20,16 +20,12 @@ namespace finnfox.Extensions
 
             var allUsers = _context.Users.ToList();
 
-            if (allUsers.Contains(_context.Users.Where(m => m.Email ==((RegisterViewModel)validationContext.ObjectInstance).Email).SingleOrDefault()))
-            {
-
-                return new ValidationResult(DuplicateEmailErrorMessage);
-            }
+            if (allUsers.Contains(_context.Users.Where(m => m.Email ==((RegisterViewModel)validationContext.ObjectInstance).Email).SingleOrDefault()) )
+                return new ValidationResult(DuplicateEmailErrorMessage);           
             else
-            {
                 return ValidationResult.Success;
 
-            }
+           
 
         }
     }
