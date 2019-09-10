@@ -4,12 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Tipovi finansijskih promena</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("+ Kreiraj novi tip promene", "Create", "TipRacunovodstvenePromenes", null, htmlAttributes: new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table id="tipoviPromenaTabela" class="table table-hover table-striped table-bordered">
+
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.NazivTipa)
@@ -17,23 +18,36 @@
         <th>
             @Html.DisplayNameFor(model => model.PozitivnostTipa)
         </th>
-        <th></th>
+        <th>
+            Akcije
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NazivTipa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PozitivnostTipa)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TipPromeneId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TipPromeneId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TipPromeneId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazivTipa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PozitivnostTipa)
+            </td>
+            <td>
+                @Html.ActionLink("✏️", "Edit", new { id = item.TipPromeneId }) |
+                @Html.ActionLink("👁️", "Details", new { id = item.TipPromeneId }) |
+                @Html.ActionLink("🗑️", "Delete", new { id = item.TipPromeneId })
+            </td>
+        </tr>
+    }
 
 </table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+
+
+
+    <script>
+        $("#tipoviPromenaTabela input.check-box:checked").after("✔️").hide();
+        $("#tipoviPromenaTabela input.check-box:not(:checked)").after("❌").hide();
+    </script>
+}

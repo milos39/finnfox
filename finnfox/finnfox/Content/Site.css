@@ -78,3 +78,66 @@ a:hover, a:focus {
     color: #fff;
     text-decoration: none;
 }
+
+.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    color: #ffffff;
+    background-color: #d36a6a;
+    border-color: #a55;
+}
+
+.dropdown{
+    display: inline-block;
+    margin-left:8px;
+}
+
+#tipoviPromenaTabela a{
+    text-decoration: none;
+}
+
+#tipoviPromenaTabela input.check-box:checked::after {
+    content: "❌";
+    display: inline-block;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: #ffd0d0;
+}
+
+.checkbox input[type="checkbox"]#PozitivnostTipa {
+    margin-left: 0;
+}
+
+.mt-70{
+    margin-top: 70px;
+}
+
+.ml-4 {
+    margin-left: 4px;
+}
+
+#login-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-top: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 29px 47px -20px rgba(0,0,0,0.4);
+}
+
+#login-form h1 {
+    text-align: center;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin: 0 auto;
+}
+
+.field-validation-error{
+    font-size: 12px;
+}
+
+.bg-pattern {
+    background: #fff8f4 url("/Content/images/finnfox-bg.png") repeat right bottom;
+}

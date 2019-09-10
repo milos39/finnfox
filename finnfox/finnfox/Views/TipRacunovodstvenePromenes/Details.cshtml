@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Pregled</h2>
 
 <div>
-    <h4>TipRacunovodstvenePromene</h4>
+    <h4>finansijske promene</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -28,7 +28,17 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TipPromeneId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="mt-70">
+    @Html.ActionLink("⬅Nazad u listu tipova promena", "Index", "TipRacunovodstvenePromenes", null, htmlAttributes: new { @class = "btn btn-default" })
+    @Html.ActionLink("Izmeni tip promene", "Edit", new { id = Model.TipPromeneId }, htmlAttributes: new { @class = "btn btn-primary ml-4" })
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+
+    <script>
+        $("input.check-box:checked").after("✔️").hide();
+        $("input.check-box:not(:checked)").after("❌").hide();
+    </script>
+}
