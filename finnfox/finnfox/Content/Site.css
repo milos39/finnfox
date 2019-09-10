@@ -78,3 +78,43 @@ a:hover, a:focus {
     color: #fff;
     text-decoration: none;
 }
+
+.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    color: #ffffff;
+    background-color: #d36a6a;
+    border-color: #a55;
+}
+
+.dropdown{
+    display: inline-block;
+    margin-left:8px;
+}
+
+#tipoviPromenaTabela a{
+    text-decoration: none;
+}
+
+#tipoviPromenaTabela input.check-box:checked::after {
+    content: "❌";
+    display: inline-block;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: #ffd0d0;
+}
+
+.checkbox input[type="checkbox"]#PozitivnostTipa {
+    margin-left: 0;
+}
+
+.mt-70{
+    margin-top: 70px;
+}
+
+.ml-4 {
+    margin-left: 4px;
+}
