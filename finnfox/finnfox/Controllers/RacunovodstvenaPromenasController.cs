@@ -64,7 +64,7 @@ namespace finnfox.Controllers
                 }
                 else
                 {
-                    double procenat =( (Usteda * -1) / ukupniPrihodi) * 100;
+                    double procenat = ( (Usteda * -1) / ukupniPrihodi) * 100;
                     viewModel.nasloviSaProcentima.Add("dugovanje - " + Math.Round(procenat, 2) + "%");
                     viewModel.kolicineNovcaPoTipu.Add(Usteda);
 
@@ -93,12 +93,13 @@ namespace finnfox.Controllers
 
 
 
-                var ukupniPrihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
-                var ukupniRashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+                var ukupniPrihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+                var ukupniRashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
 
                 var Usteda = ukupniPrihodi - ukupniRashodi;
 
                 var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
+
                 double vrednostRacunaKategorija = 0;
 
 
