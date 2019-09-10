@@ -59,13 +59,13 @@ namespace finnfox.Controllers
                 if(Usteda > 0)
                 {
                     double procenat = (Usteda / ukupniPrihodi) * 100;
-                    viewModel.nasloviSaProcentima.Add("Usteda - " + Math.Round(procenat, 2) + "%");
+                    viewModel.nasloviSaProcentima.Add("ušteda - " + Math.Round(procenat, 2) + "%");
                     viewModel.kolicineNovcaPoTipu.Add(Usteda);
                 }
                 else
                 {
                     double procenat =( (Usteda * -1) / ukupniPrihodi) * 100;
-                    viewModel.nasloviSaProcentima.Add("Dugovanje - " + Math.Round(procenat, 2) + "%");
+                    viewModel.nasloviSaProcentima.Add("dugovanje - " + Math.Round(procenat, 2) + "%");
                     viewModel.kolicineNovcaPoTipu.Add(Usteda);
 
                 }
@@ -88,15 +88,40 @@ namespace finnfox.Controllers
             }
             else
             {
-                var ukupanZbir = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+
+                
+
+
+
+                var ukupniPrihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+                var ukupniRashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+
+                var Usteda = ukupniPrihodi - ukupniRashodi;
+
                 var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
                 double vrednostRacunaKategorija = 0;
+
+
+
+                if (Usteda > 0)
+                {
+                    double procenat = (Usteda / ukupniPrihodi) * 100;
+                    viewModel.nasloviSaProcentima.Add("ušteda - " + Math.Round(procenat, 2) + "%");
+                    viewModel.kolicineNovcaPoTipu.Add(Usteda);
+                }
+                else
+                {
+                    double procenat = ((Usteda * -1) / ukupniPrihodi) * 100;
+                    viewModel.nasloviSaProcentima.Add("dugovanje - " + Math.Round(procenat, 2) + "%");
+                    viewModel.kolicineNovcaPoTipu.Add(Usteda);
+
+                }
 
                 foreach (var kategorija in kategorije)
                 {
                     vrednostRacunaKategorija = db.RacunovodstvenaPromenas.Where(m => m.TipPromeneId == kategorija.TipPromeneId && m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
 
-                    double procenat = (vrednostRacunaKategorija / ukupanZbir) * 100;
+                    double procenat = (vrednostRacunaKategorija / ukupniPrihodi) * 100;
 
 
                     viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa + " - " + Math.Round(procenat,2) + "%");
