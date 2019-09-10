@@ -19,7 +19,7 @@ namespace finnfox
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TipPromeneId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="polje {0} je obavezno")]
         [StringLength(50)]
         [Display (Name ="Naziv tipa" )]
         public string NazivTipa { get; set; }

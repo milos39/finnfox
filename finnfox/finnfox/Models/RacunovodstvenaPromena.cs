@@ -15,13 +15,13 @@ namespace finnfox
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? PromenaId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "polje {0} je obavezno")]
         [StringLength(50)]
         [Display(Name = "Naziv promene")]
 
         public string NazivPromene { get; set; }
-            
-        
+
+        [Required(ErrorMessage = "polje {0} je obavezno")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString ="{dd/MM/yy}")]
         [Display(Name = "Datum promene")]
         public DateTime DatumPromene { get; set; }

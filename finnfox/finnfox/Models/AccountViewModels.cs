@@ -66,7 +66,7 @@ namespace finnfox.Models
 
     public class RegisterViewModel
     {
-        [Required(ErrorMessage ="Morate popuniti E-mail")]
+        [Required(ErrorMessage = "polje {0} je obavezno")]
         [EmailAddress(ErrorMessage ="Email nije u korektnom formatu")]
         [EmailExtension
             (
@@ -77,18 +77,18 @@ namespace finnfox.Models
         public string Email { get; set; }
 
 
-        [Required(ErrorMessage = "Morate uneti ime  ")]
+        [Required(ErrorMessage = "polje {0} je obavezno")]
         [Display(Name = "Ime") ]
         public string UserName { get;set ; }
 
 
         [Display(Name = "Prezime")]
-        [Required(ErrorMessage ="Morate uneti prezime ")]
+        [Required(ErrorMessage = "polje {0} je obavezno")]
         public string UserLastName { get; set; }
 
         //Passwords must have at least one non letter or digit character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').
 
-        [Required]
+        [Required(ErrorMessage = "polje {0} je obavezno")]
         [StringLength(100, ErrorMessage = "{0} mora: biti dugacka najmanje {2} slova, sadrzati minimum jednu cifru ( 0 - 9) i mora imati bar jedno veliko slovo ( A - Z).", MinimumLength = 6)]
         //[DataType(DataType.Password, ErrorMessage = "Password nije u korektnom formatu")]
         [Display(Name = "Šifra")]
