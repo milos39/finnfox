@@ -3,7 +3,7 @@
 app.controller('racunovodstvenePromeneController', function ($scope, $http) {
 
     function dinamicanNaslov(godina) {
-        console.log("dinamicki naslov parametar je: " + godina)
+        //console.log("dinamicki naslov parametar je: " + godina)
         if (godina == 0) {
             $("#godina-naslov").html("Kompletna finansijska istorija");
         } else {
@@ -36,18 +36,18 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
         event.stopPropagation();
         var kliknutaGodina = $(this).attr("class");
         if (kliknutaGodina.length == 4 || kliknutaGodina == 0) {
-            console.log("uspeh jer je kliknut: " + kliknutaGodina + ' !');
+            //console.log("uspeh jer je kliknut: " + kliknutaGodina + ' !');
             loadPromene(kliknutaGodina);
             drawOrUpdateChart(kliknutaGodina);
             dinamicanNaslov(kliknutaGodina);
         } else {
-            console.log("neuspeh jer je kliknut: " + kliknutaGodina);
-            console.log(kliknutaGodina.length);
+            //console.log("neuspeh jer je kliknut: " + kliknutaGodina);
+            //console.log(kliknutaGodina.length);
             return;
         }
         
 
-        console.log("clicked " + kliknutaGodina);
+        //console.log("clicked " + kliknutaGodina);
         
     });
 });

@@ -136,7 +136,7 @@
 
     function drawOrUpdateChart(godina) {
         $.get("http://localhost:1091/RacunovodstvenaPromenas/pieChart?godina=" + godina, function (data, status) {
-            
+            console.log(data);
             if ($("#myChart").hasClass("chartjs-render-monitor")) {
                 removeData(myChart);
                 addData(myChart, data.nasloviSaProcentima, data.kolicineNovcaPoTipu);
