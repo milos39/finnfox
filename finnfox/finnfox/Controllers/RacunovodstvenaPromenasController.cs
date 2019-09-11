@@ -36,9 +36,27 @@ namespace finnfox.Controllers
             }
         }
 
-        //Get: RacunovodstvenaPromenas/godinaMesecChart?godina=val&mesec=val
 
 
+
+
+
+
+
+
+
+
+
+        public ActionResult globalnePromeneMesecTip(int godina)
+        {
+            RacunovodstvenePromeneTipMesecViewModel viewModel = new RacunovodstvenePromeneTipMesecViewModel();
+
+            viewModel.meseci = db.RacunovodstvenaPromenas.Where(m => m.DatumPromene.Year == godina).Select(m=>m.DatumPromene.Month).Distinct().ToList();
+
+        }
+
+
+        //GET: RacunovodstvenaPromenas/promenePoMesecu?godina=val&mesec=val
         public ActionResult promenePoMesecu(int godina,int mesec)
         {
             ListRacunovodstvenaPromenaMesecViewModel viewModel = new ListRacunovodstvenaPromenaMesecViewModel();
@@ -77,7 +95,7 @@ namespace finnfox.Controllers
             return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
-
+        //GET: RacunovodstvenaPromenas/godinaMesecChart?godina=val&mesec=val
         [HttpGet]
         public ActionResult godinaMesecChart (int godina,int mesec)
         {
