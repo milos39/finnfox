@@ -35,8 +35,8 @@ namespace finnfox.Controllers
 
                 var Usteda = ukupniPrihodi - ukupniRashodi;
 
-                var Kateg = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList();
-                var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
+                var kategorije = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList();
+
                 double vrednostRacunaKategorija = 0;
 
                 if(ukupniPrihodi == 0)
@@ -98,7 +98,8 @@ namespace finnfox.Controllers
 
                 var Usteda = ukupniPrihodi - ukupniRashodi;
 
-                var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
+                var kategorije = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList();
+
 
                 double vrednostRacunaKategorija = 0;
 
@@ -225,7 +226,9 @@ namespace finnfox.Controllers
         // GET: RacunovodstvenaPromenas/Create
         public ActionResult Create()
         {
-            ViewBag.TipPromeneId = new SelectList(db.TipRacunovodstvenePromenes, "TipPromeneId", "NazivTipa");
+            var userId = User.Identity.GetUserId();
+            ViewBag.TipPromeneId = new SelectList( db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList()
+, "TipPromeneId", "NazivTipa");
             return View();
         }
 
