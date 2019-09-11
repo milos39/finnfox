@@ -20,9 +20,16 @@ namespace finnfox.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
 
+
+
+        //Get: RacunovodstvenaPromenas/
+
+
+
+
         //GET: RacunovodstvenaPromenas/pieChart/godina
         [HttpGet]
-        public async Task<ActionResult> pieChart (int godina)
+        public async Task<ActionResult> godinaChart (int godina)
         {
             var userId = User.Identity.GetUserId();
 
