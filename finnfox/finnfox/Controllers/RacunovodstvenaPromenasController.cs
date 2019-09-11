@@ -21,9 +21,20 @@ namespace finnfox.Controllers
 
 
 
+        //Get: RacunovodstvenaPromenas/godinaMesecChart?godina=val&mesec=val
 
-        //Get: RacunovodstvenaPromenas/
+        [HttpGet]
+        public ActionResult godinaMesecChart (int godina,int mesec)
+        {
+            var userId = User.Identity.GetUserId();
+            PieChartViewModel viewModel = new PieChartViewModel();
 
+            var ukupniPrihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina && m.DatumPromene.Month == mesec && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+            var ukupniRashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina && m.DatumPromene.Month == mesec && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+      
+
+        }
+        
 
 
 
@@ -54,9 +65,11 @@ namespace finnfox.Controllers
                         
                             vrednostRacunaKategorija = db.RacunovodstvenaPromenas.Where(m => m.TipPromeneId == kategorija.TipPromeneId && m.DatumPromene.Year == godina && m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
 
+                        double procenat = (vrednostRacunaKategorija / ukupniRashodi) * 100;
+
                         if (vrednostRacunaKategorija != 0)
                         {
-                            viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa);
+                            viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa + Math.Round(procenat,2 )+ "%" );
                             viewModel.kolicineNovcaPoTipu.Add(vrednostRacunaKategorija);
                         }
 
