@@ -38,6 +38,46 @@ namespace finnfox.Controllers
 
         //Get: RacunovodstvenaPromenas/godinaMesecChart?godina=val&mesec=val
 
+
+        public ActionResult promenePoMesecu(int godina,int mesec)
+        {
+            ListRacunovodstvenaPromenaMesecViewModel viewModel = new ListRacunovodstvenaPromenaMesecViewModel();
+            var userId = User.Identity.GetUserId();
+
+            if (godina > 0)
+            {
+                var models = db.RacunovodstvenaPromenas.Where(m => m.DatumPromene.Year == godina && m.DatumPromene.Month == mesec && m.ApplicationUserId == userId).ToList();
+
+                foreach (var model in models)
+                {
+                    viewModel.racunovodstvenePromene.Add(new RacunovodstvenaPromenaDTO()
+                    {
+                        Id = model.PromenaId,
+                        DatumPromene = model.DatumPromene.Date.ToString("dd/MM/yy"),
+                        KolicinaNovca = model.KolicinaNovca,
+                        NazivPromene = model.NazivPromene,
+                        TipRacunovodstvenePromene = model.TipRacunovodstvenePromene.NazivTipa,
+                        TipPromeneId = model.TipPromeneId,
+                        Valuta = model.Valuta
+                    });
+                }
+                var pozitivno = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == true && m.DatumPromene.Year == godina && m.DatumPromene.Month == mesec && m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+                var negativno = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == false && m.DatumPromene.Year == godina && m.DatumPromene.Month == mesec && m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+
+
+
+
+                viewModel.balans = pozitivno - negativno;
+                viewModel.godine = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.DatumPromene.Year).Distinct().ToList();
+                viewModel.meseciZaDatuGodinu = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina).Select(m => m.DatumPromene.Month).Distinct().ToList();
+            }
+           
+
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
+        }
+
+
         [HttpGet]
         public ActionResult godinaMesecChart (int godina,int mesec)
         {
@@ -111,7 +151,7 @@ namespace finnfox.Controllers
 
                         if (vrednostRacunaKategorija != 0)
                         {
-                            viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa + Math.Round(procenat,2 )+ "%" );
+                            viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa+" " + Math.Round(procenat,2 )+ "%" );
                             viewModel.kolicineNovcaPoTipu.Add(vrednostRacunaKategorija);
                         }
 
