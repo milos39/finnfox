@@ -7,8 +7,9 @@ namespace finnfox.Models
 {
     public class RacunovodstvenePromeneTipMesecViewModel
     {
-        List<int> meseci;
-        List<KeyValuePair<string, List<int> > > promenePoTipu;
+        public List<int> meseci { get; set; }
+        public List<KeyValuePair<string, List<int>>> promenePoTipu { get; set; }
+      
 
         public RacunovodstvenePromeneTipMesecViewModel()
         {
