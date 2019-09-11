@@ -246,6 +246,7 @@
     <Content Include="Content\images\finnfox-bg50.png" />
     <Content Include="Content\images\finnfox404.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\select2.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -274,6 +275,7 @@
     <Content Include="Scripts\NGracunovodstvenePromene.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select2.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
