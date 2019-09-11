@@ -35,7 +35,7 @@ namespace finnfox.Controllers
 
                 var Usteda = ukupniPrihodi - ukupniRashodi;
 
-                var Kategorije = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.TipRacunovodstvenePromene).ToList();
+                var Kateg = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList();
                 var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
                 double vrednostRacunaKategorija = 0;
 
