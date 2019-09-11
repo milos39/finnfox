@@ -15,7 +15,7 @@
         <h4>Nova promena na računu</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.NazivPromene, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -68,12 +68,17 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bs-datepicker")
+    @Scripts.Render("~/bundles/select2")
 
     <script>
         $('#datepicker').datepicker({
             format: "dd/mm/yy",
             todayBtn: "linked",
             language: "rs-latin"
+        });
+
+        $(document).ready(function() {
+            $('select').select2();
         });
     </script>
 

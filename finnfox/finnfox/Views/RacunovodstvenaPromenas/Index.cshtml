@@ -12,7 +12,8 @@
         @*<button class="btn btn-primary" id="updateTable">
             update table
         </button>
-        <input type="number" id="godinaTest" />*@
+        <input type="number" id="godinaTest" />
+        <p id="nizDemo"></p>*@
 
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="godineUsistemu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -168,8 +169,9 @@
 
 
     function drawOrUpdateChart(godina) {
-        $.get("http://localhost:1091/RacunovodstvenaPromenas/pieChart?godina=" + godina, function (data, status) {
+        $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaChart?godina=" + godina, function (data, status) {
             console.log(data);
+
             if ($("#myChart").hasClass("chartjs-render-monitor")) {
                 myChart.destroy();
                 
@@ -178,9 +180,11 @@
         });
     };
 
+    //var niz = ["papaja_", "banana_", "mango_", "kivi_"];
+    //$("#nizDemo").html(niz);
     //$("#updateTable").click(function () {
-    //    var godinaTest = $("#godinaTest").val();
-    //    drawOrUpdateChart(godinaTest);
+    //    niz.splice($("#godinaTest").val(), 1);
+    //    $("#nizDemo").html(niz);
             
             
     //});
