@@ -7,8 +7,8 @@
 <div ng-app="racunovodstvenePromene">
     <div id="ctrl-wrapper" ng-controller="racunovodstvenePromeneController">
         <h2 id="godina-naslov">Kompletna finansijska istorija</h2>
-        @Html.ActionLink("+ Kreiraj novu promenu", "Create",  "RacunovodstvenaPromenas", null, htmlAttributes: new { @class = "btn btn-primary" })
-        
+        @Html.ActionLink("+ Kreiraj novu promenu", "Create", "RacunovodstvenaPromenas", null, htmlAttributes: new { @class = "btn btn-primary" })
+
         @*<button class="btn btn-primary" id="updateTable">
             update table
         </button>
@@ -22,9 +22,19 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="godineUsistemu" id="godine-dropdown">
                 <li ng-repeat="godina in promenePoGodini.godine"><a class="{{godina}}" href="#">{{godina}}</a></li>
-                <li><a class="0" href="#">sve</a></li>
+                <li><a class="0" href="#">sve godine</a></li>
             </ul>
+        </div>
 
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="meseciUsistemu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                meseci
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="meseciUsistemu" id="meseci-dropdown">
+                <li ng-repeat="mesec in meseciZaDatuGodinu"><a class="{{mesec}}" href="#">{{mesec}}</a></li>
+                <li><a class="0" href="#">svi meseci</a></li>
+            </ul>
         </div>
 
         <table id="promeneTabela"
@@ -40,13 +50,13 @@
                 </tr>
             </thead>
             @*<tbody>
-                    <tr ng-repeat="promena in promenePoGodini.racunovodstvenePromene">
-                        <td>{{promena.DatumPromene}}</td>
-                        <td>{{promena.TipRacunovodstvenePromene}}</td>
-                        <td>{{promena.NazivPromene}}</td>
-                        <td>{{promena.KolicinaNovca}}</td>
-                    </tr>
-                </tbody>*@
+                <tr ng-repeat="promena in promenePoGodini.racunovodstvenePromene">
+                    <td>{{promena.DatumPromene}}</td>
+                    <td>{{promena.TipRacunovodstvenePromene}}</td>
+                    <td>{{promena.NazivPromene}}</td>
+                    <td>{{promena.KolicinaNovca}}</td>
+                </tr>
+            </tbody>*@
 
         </table>
 
@@ -54,9 +64,9 @@
             <div class="col-md-4 col-md-offset-4">
                 <canvas id="myChart" width="200" height="200"></canvas>
             </div>
-            
+
         </div>
-        
+
 
 
 
@@ -71,48 +81,48 @@
 
 
         @*<table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ApplicationUser.UserLastName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TipRacunovodstvenePromene.NazivTipa)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.NazivPromene)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DatumPromene.Date)
-                    </th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationUser.UserLastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipRacunovodstvenePromene.NazivTipa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NazivPromene)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DatumPromene.Date)
+                </th>
+                <th></th>
+            </tr>
 
 
 
-            @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ApplicationUser.UserLastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TipRacunovodstvenePromene.NazivTipa)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NazivPromene)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DatumPromene.Date)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id=item.PromenaId }) |
-                        @Html.ActionLink("Details", "Details", new { id=item.PromenaId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id=item.PromenaId })
-                    </td>
-                </tr>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.UserLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipRacunovodstvenePromene.NazivTipa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazivPromene)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DatumPromene.Date)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.PromenaId }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.PromenaId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.PromenaId })
+                </td>
+            </tr>
 
-            }
+        }
 
-            </table>*@
+        </table>*@
     </div>
 </div>
 
@@ -168,16 +178,28 @@
     };
 
 
-    function drawOrUpdateChart(godina) {
-        $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaChart?godina=" + godina, function (data, status) {
+    function drawOrUpdateChart(godina, mesec) {
+        if (mesec === undefined) {
+            $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaChart?godina=" + godina, function (data, status) {
             console.log(data);
 
             if ($("#myChart").hasClass("chartjs-render-monitor")) {
                 myChart.destroy();
-                
             }
             drawChart(data);
         });
+        } else {
+            $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaMesecChart?godina=" + godina + "&mesec=" + mesec, function (data, status) {
+            console.log(data);
+
+            if ($("#myChart").hasClass("chartjs-render-monitor")) {
+                myChart.destroy();
+            }
+            drawChart(data);
+        });
+        };
+            
+        
     };
 
     //var niz = ["papaja_", "banana_", "mango_", "kivi_"];
