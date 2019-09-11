@@ -41,7 +41,7 @@ namespace finnfox.Controllers
 
 
         [HttpGet]
-        public ActionResult MeseciZaGodinu(int godina)
+        public ActionResult meseciZaGodinu(int godina)
         {
             var meseci = db.RacunovodstvenaPromenas.Where(m => m.DatumPromene.Year == godina).Select(m => m.DatumPromene.Month).Distinct().ToList();
             return Json(meseci, JsonRequestBehavior.AllowGet);
@@ -53,6 +53,18 @@ namespace finnfox.Controllers
 
 
 
+        public ActionResult globalnePromeneMesecTip(int godina)
+        {
+            RacunovodstvenePromeneTipMesecViewModel viewModel = new RacunovodstvenePromeneTipMesecViewModel();
+
+            viewModel.meseci = db.RacunovodstvenaPromenas.Where(m => m.DatumPromene.Year == godina).Select(m => m.DatumPromene.Month).Distinct().ToList();
+
+
+            
+
+
+
+        }
 
 
         //GET: RacunovodstvenaPromenas/promenePoMesecu?godina=val&mesec=val
