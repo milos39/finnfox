@@ -188,7 +188,7 @@ namespace finnfox.Controllers
 
 
                 viewModel.balans = pozitivno - negativno;
-                viewModel.godine = db.RacunovodstvenaPromenas.Select(m => m.DatumPromene.Year).Distinct().ToList();
+                viewModel.godine = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select( m => m.DatumPromene.Year).Distinct().ToList();
             }
             else
             {
@@ -209,7 +209,7 @@ namespace finnfox.Controllers
                 }
 
 
-                viewModel.godine = db.RacunovodstvenaPromenas.Select(m => m.DatumPromene.Year).Distinct().ToList();
+                viewModel.godine = db.RacunovodstvenaPromenas.Where(m=>m.ApplicationUserId == userId).Select(m => m.DatumPromene.Year).Distinct().ToList();
 
             }
            
