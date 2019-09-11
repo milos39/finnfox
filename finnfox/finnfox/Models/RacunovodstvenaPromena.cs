@@ -15,13 +15,13 @@ namespace finnfox
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? PromenaId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "polje {0} je obavezno")]
         [StringLength(50)]
         [Display(Name = "Naziv promene")]
 
         public string NazivPromene { get; set; }
-            
-        
+
+        [Required(ErrorMessage = "polje {0} je obavezno")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString ="{dd/MM/yy}")]
         [Display(Name = "Datum promene")]
         public DateTime DatumPromene { get; set; }
@@ -38,8 +38,10 @@ namespace finnfox
         [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-
+        [Required(ErrorMessage = "polje {0} je obavezno")]
         [Display(Name = "Kolicina novca")]
+        [RegularExpression(@"^[-+]?[0-9]*\.?[0-9]+$", ErrorMessage = "{0} mora biti broj")]
+
         public double KolicinaNovca { get; set; }
 
         public string Valuta { get; set; }

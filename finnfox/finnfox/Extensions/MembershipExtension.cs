@@ -26,7 +26,8 @@ namespace finnfox.Extensions
             var property = validationContext.ObjectType.GetProperty(UppercasePasswordErrorMessage);
 
 
-
+            if (((RegisterViewModel)validationContext.ObjectInstance).Password == null)
+                return null;
             
 
             if (!Regex.IsMatch(((RegisterViewModel)validationContext.ObjectInstance).Password, "[A-Z]"))

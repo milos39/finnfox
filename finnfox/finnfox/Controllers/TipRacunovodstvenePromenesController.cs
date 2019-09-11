@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using finnfox;
+using finnfox.Extensions;
 using finnfox.Models;
 
 namespace finnfox.Controllers
@@ -18,7 +19,9 @@ namespace finnfox.Controllers
         // GET: TipRacunovodstvenePromenes
         public ActionResult Index()
         {
-            return View(db.TipRacunovodstvenePromenes.ToList());
+            var userId = User.Identity.GetUserId();
+            return View(db.TipRacunovodstvenePromenes.ToList() );
+
         }
 
         // GET: TipRacunovodstvenePromenes/Details/5
