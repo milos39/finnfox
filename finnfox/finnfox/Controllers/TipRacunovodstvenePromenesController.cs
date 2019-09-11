@@ -20,7 +20,7 @@ namespace finnfox.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            return View(db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList());
+            return View(db.TipRacunovodstvenePromenes.ToList() );
 
         }
 

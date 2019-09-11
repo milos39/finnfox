@@ -35,12 +35,8 @@ namespace finnfox.Controllers
 
                 var Usteda = ukupniPrihodi - ukupniRashodi;
 
-<<<<<<< HEAD
-                var kategorije = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList();
 
-=======
                 var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
->>>>>>> parent of 2cc5218... For science
                 double vrednostRacunaKategorija = 0;
 
                 if(ukupniPrihodi == 0)
@@ -102,7 +98,7 @@ namespace finnfox.Controllers
 
                 var Usteda = ukupniPrihodi - ukupniRashodi;
 
-                var kategorije = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList();
+                var kategorije = db.TipRacunovodstvenePromenes.Where(m => m.PozitivnostTipa == false).ToList();
 
 
                 double vrednostRacunaKategorija = 0;
