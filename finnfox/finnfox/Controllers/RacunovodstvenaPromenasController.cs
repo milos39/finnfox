@@ -34,8 +34,8 @@ namespace finnfox.Controllers
                 var ukupniRashodi  = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
 
                 var Usteda = ukupniPrihodi - ukupniRashodi;
-                
 
+                var Kategorije = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.TipRacunovodstvenePromene).ToList();
                 var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
                 double vrednostRacunaKategorija = 0;
 
