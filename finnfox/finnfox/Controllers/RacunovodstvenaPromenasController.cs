@@ -243,8 +243,7 @@ namespace finnfox.Controllers
         public ActionResult Create()
         {
             var userId = User.Identity.GetUserId();
-            ViewBag.TipPromeneId = new SelectList( db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList()
-, "TipPromeneId", "NazivTipa");
+            ViewBag.TipPromeneId = new SelectList(db.TipRacunovodstvenePromenes, "TipPromeneId", "NazivTipa");
             return View();
         }
 
