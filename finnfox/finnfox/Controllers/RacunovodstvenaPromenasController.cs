@@ -19,7 +19,22 @@ namespace finnfox.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        private void procenatUstede(  double Usteda, ref PieChartViewModel viewModel, double ukupniPrihodi )
+        {
+            if (Usteda > 0)
+            {
+                double procenat = (Usteda / ukupniPrihodi) * 100;
+                viewModel.nasloviSaProcentima.Add("ušteda - " + Math.Round(procenat, 2) + "%");
+                viewModel.kolicineNovcaPoTipu.Add(Usteda);
+            }
+            else
+            {
+                double procenat = ((Usteda * -1) / ukupniPrihodi) * 100;
+                viewModel.nasloviSaProcentima.Add("dugovanje - " + Math.Round(procenat, 2) + "%");
+                viewModel.kolicineNovcaPoTipu.Add(Usteda);
 
+            }
+        }
 
         //Get: RacunovodstvenaPromenas/godinaMesecChart?godina=val&mesec=val
 
@@ -36,6 +51,11 @@ namespace finnfox.Controllers
             var Usteda = ukupniPrihodi - ukupniRashodi;
 
             var kategorije = db.TipRacunovodstvenePromenes.Where(m => m.PozitivnostTipa == false).ToList();
+
+
+            procenatUstede(Usteda,ref viewModel, ukupniPrihodi);
+
+            
 
             foreach (var kategorija in kategorije)
             {
