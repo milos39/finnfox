@@ -38,8 +38,10 @@ namespace finnfox
         [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-
+        [Required(ErrorMessage = "polje {0} je obavezno")]
         [Display(Name = "Kolicina novca")]
+        [RegularExpression(@"^[-+]?[0-9]*\.?[0-9]+$", ErrorMessage = "{0} mora biti broj")]
+
         public double KolicinaNovca { get; set; }
 
         public string Valuta { get; set; }
