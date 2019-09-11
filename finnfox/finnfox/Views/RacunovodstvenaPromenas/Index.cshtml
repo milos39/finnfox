@@ -123,7 +123,7 @@
         chart.data.labels = label;
         chart.data.datasets[0].data = data;
         chart.update();
-    }
+    };
 
     function removeData(chart) {
         chart.data.labels = [];
@@ -131,66 +131,50 @@
             dataset.data = [];
         });
         chart.update();
-    }
+    };
+
+    function drawChart(data) {
+        var chartType;
+        if (data.nasloviSaProcentima[0].startsWith("ušteda - ")) {
+            chartType = "doughnut";
+        } else {
+            chartType = "bar";
+        }
+        var ctx = document.getElementById('myChart');
+
+        myChart = new Chart(ctx, {
+            type: chartType,
+            data: {
+                labels: data.nasloviSaProcentima,
+                datasets: [{
+                    label: 'Udeo troškova u ukupnim primanjima',
+                    data: data.kolicineNovcaPoTipu,
+                    backgroundColor: [
+                        '#0060df',
+                        '#ff9f40',
+                        '#ff6384',
+                        '#4bc0c0',
+                        '#ffe900',
+                        '#ff0039',
+                        '#a1ff66'
+                    ]
+                }]
+            },
+            options: {
+
+            }
+        });
+    };
 
 
     function drawOrUpdateChart(godina) {
         $.get("http://localhost:1091/RacunovodstvenaPromenas/pieChart?godina=" + godina, function (data, status) {
             console.log(data);
             if ($("#myChart").hasClass("chartjs-render-monitor")) {
-                removeData(myChart);
-                addData(myChart, data.nasloviSaProcentima, data.kolicineNovcaPoTipu);
-            } else {
-                var ctx = document.getElementById('myChart');
-
-                if (data.nasloviSaProcentima.includes("ušteda")) {
-                        myChart = new Chart(ctx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: data.nasloviSaProcentima,
-                            datasets: [{
-                                label: 'Udeo troškova u ukupnim primanjima',
-                                data: data.kolicineNovcaPoTipu,
-                                backgroundColor: [
-                                    '#0060df',
-                                    '#ff9f40',
-                                    '#ff6384',
-                                    '#4bc0c0',
-                                    '#ffe900',
-                                    '#ff0039',
-                                    '#a1ff66'
-                                ]
-                            }]
-                        },
-                        options: {
-
-                        }
-                    });
-                } else {
-                        myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: data.nasloviSaProcentima,
-                            datasets: [{
-                                label: 'Udeo troškova u ukupnim primanjima',
-                                data: data.kolicineNovcaPoTipu,
-                                backgroundColor: [
-                                    '#0060df',
-                                    '#ff9f40',
-                                    '#ff6384',
-                                    '#4bc0c0',
-                                    '#ffe900',
-                                    '#ff0039',
-                                    '#a1ff66'
-                                ]
-                            }]
-                        },
-                        options: {
-
-                        }
-                    });
-                }
+                myChart.destroy();
+                
             }
+            drawChart(data);
         });
     };
 
