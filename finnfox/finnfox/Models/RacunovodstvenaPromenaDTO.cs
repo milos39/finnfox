@@ -7,9 +7,10 @@ namespace finnfox.Models
 {
     public class RacunovodstvenaPromenaDTO
     {
-        
 
-      
+
+        public int? Id { get; set; }
+
         public string NazivPromene { get; set; }
 
         public string DatumPromene { get; set; }

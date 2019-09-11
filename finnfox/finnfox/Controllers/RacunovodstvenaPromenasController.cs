@@ -158,6 +158,7 @@ namespace finnfox.Controllers
                 {
                     viewModel.racunovodstvenePromene.Add(new RacunovodstvenaPromenaDTO()
                     {
+                        Id = model.PromenaId,
                         DatumPromene = model.DatumPromene.Date.ToString("dd/MM/yy"),
                         KolicinaNovca = model.KolicinaNovca,
                         NazivPromene = model.NazivPromene,
@@ -183,6 +184,7 @@ namespace finnfox.Controllers
                 {
                     viewModel.racunovodstvenePromene.Add(new RacunovodstvenaPromenaDTO()
                     {
+                        Id = model.PromenaId,
                         DatumPromene = model.DatumPromene.Date.ToString("dd/MM/yy"),
                         KolicinaNovca = model.KolicinaNovca,
                         NazivPromene = model.NazivPromene,
