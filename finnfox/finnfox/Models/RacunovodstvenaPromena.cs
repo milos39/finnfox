@@ -22,8 +22,8 @@ namespace finnfox
         public string NazivPromene { get; set; }
 
         [Required(ErrorMessage = "polje {0} je obavezno")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yy}")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString ="{0:dd/MM/yy}")]
         [Display(Name = "Datum promene")]
         public DateTime DatumPromene { get; set; }
 

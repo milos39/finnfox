@@ -21,6 +21,9 @@ namespace finnfox.Controllers
 
         private void procenatUstede(  double Usteda, ref PieChartViewModel viewModel, double ukupniPrihodi )
         {
+
+            if (ukupniPrihodi == 0)
+                 return;
             if (Usteda > 0)
             {
                 double procenat = (Usteda / ukupniPrihodi) * 100;
@@ -53,16 +56,78 @@ namespace finnfox.Controllers
 
 
 
+<<<<<<< Updated upstream
         //public ActionResult globalnePromeneMesecTip(int godina)
         //{
         //    RacunovodstvenePromeneTipMesecViewModel viewModel = new RacunovodstvenePromeneTipMesecViewModel();
 
         //    viewModel.meseci = db.RacunovodstvenaPromenas.Where(m => m.DatumPromene.Year == godina).Select(m => m.DatumPromene.Month).Distinct().ToList();
+=======
+        public ActionResult globalnePromeneMesecTip(int godina)
+        {
+
+           
+            List<int> nizVrednosti = new List<int>();
+            var sviRashodi = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList();
+            List<int> meseci = new List<int>();
+            List<List<double>> vrednostiPoKategoriji = new List<List<double>>();
+            List<double> vrednosti = new List<double>();
+            List<string> kategorije = new List<string>();
+
+            RacunovodstvenePromeneTipMesecViewModel viewModel = new RacunovodstvenePromeneTipMesecViewModel();
+            var querryResult = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == false).GroupBy(x => new {  x.DatumPromene.Month , x.TipRacunovodstvenePromene.NazivTipa }, (key, values) => new { mesec = key, vrednost = values.Sum(m => m.KolicinaNovca )}).ToList();
+                
+            foreach (var objekat in querryResult)
+            {
+                if (!meseci.Contains(objekat.mesec.Month))
+                    meseci.Add(objekat.mesec.Month);
+
+              
+            }
+>>>>>>> Stashed changes
 
 
-            
+            foreach (var rashod in  sviRashodi)
+            {
+
+                vrednosti = new List<double>();
+
+                bool flag = false;
+               
+                foreach (var objekat in querryResult)
+                {
+
+                    if(rashod.NazivTipa == objekat.mesec.NazivTipa)
+                    {
+                        for (int i = 0; i < meseci.Count; i++)
+                        {
+
+                             if( meseci[i] == objekat.mesec.Month)
+                            {
+                                vrednosti.Add(objekat.vrednost);
+
+                            }
+                             else
+                            {
+                                vrednosti.Add(0);
+                            }
+
+                        }
+                    }
+                      
+                }
+
+                vrednostiPoKategoriji.Add(vrednosti);                
+                kategorije.Add(rashod.NazivTipa);
+
+            }
 
 
+            viewModel.kategorije = kategorije;
+            viewModel.meseci = meseci;
+            viewModel.vrednostiPoKategoriji = vrednostiPoKategoriji;
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
 
         //}
 
@@ -115,7 +180,7 @@ namespace finnfox.Controllers
             PieChartViewModel viewModel = new PieChartViewModel();
 
             var ukupniPrihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina && m.DatumPromene.Month == mesec && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
-            var ukupniRashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina && m.DatumPromene.Month == mesec && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+            var ukupniRashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina && m.DatumPromene.Month == mesec && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
 
             var Usteda = ukupniPrihodi - ukupniRashodi;
 
@@ -133,7 +198,7 @@ namespace finnfox.Controllers
 
                 if(vrednostRacunaKategorija != 0)
                 {
-                    viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa + Math.Round(procenat, 2) + "%");
+                    viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa +" "+ Math.Round(procenat, 2) + "%");
                     viewModel.kolicineNovcaPoTipu.Add(vrednostRacunaKategorija);
 
                 }
