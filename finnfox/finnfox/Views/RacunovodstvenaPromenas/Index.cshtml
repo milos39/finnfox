@@ -40,13 +40,16 @@
         <table id="promeneTabela"
                data-search="true"
                data-show-columns="true"
-               locale="hr-HR">
+               locale="hr-HR"
+               data-sortable="true"
+               data-height="400"
+               data-virtual-scroll="true">
             <thead>
                 <tr>
-                    <th data-field="DatumPromene">datum</th>
-                    <th data-field="TipRacunovodstvenePromene">tip promene</th>
-                    <th data-field="NazivPromene">naziv promene</th>
-                    <th data-field="KolicinaNovca">vrednost</th>
+                    <th data-field="DatumPromene" data-sortable="true">datum</th>
+                    <th data-field="TipRacunovodstvenePromene" data-sortable="true">tip promene</th>
+                    <th data-field="NazivPromene" data-sortable="true">naziv promene</th>
+                    <th data-field="KolicinaNovca" data-sortable="true">vrednost</th>
                 </tr>
             </thead>
             @*<tbody>
@@ -66,62 +69,6 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        @*<table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ApplicationUser.UserLastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TipRacunovodstvenePromene.NazivTipa)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NazivPromene)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DatumPromene.Date)
-                </th>
-                <th></th>
-            </tr>
-
-
-
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicationUser.UserLastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipRacunovodstvenePromene.NazivTipa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NazivPromene)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DatumPromene.Date)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.PromenaId }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.PromenaId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.PromenaId })
-                </td>
-            </tr>
-
-        }
-
-        </table>*@
     </div>
 </div>
 

@@ -165,3 +165,50 @@ a:hover, a:focus {
 .select2-container--open .select2-dropdown--below {
     box-shadow: 0px 18px 17px -11px rgba(0,0,0,0.3);
 }
+
+.bootstrap-table .fixed-table-container.fixed-height .fixed-table-border {
+    border-left: none;
+    border-right: none;
+}
+
+.bootstrap-table .fixed-table-container.fixed-height:not(.has-footer) {
+    border-bottom: none;
+}
+
+.centered{
+    display: block;
+    margin: 0 auto;
+}
+
+.img-centered{
+    min-width:320px;
+    width:40%;
+}
+
+.btn-large-centered{
+    width:140px;
+    display: block;
+    margin: 0 auto;
+}
+
+.title-large {
+    font-weight: 900;
+    margin: -7vh 0 0 0;
+}
+
+.subtitle-large{
+    margin-top: 0px;
+}
+
+.centered-vert-and-hor {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.overflow-hidden{
+    overflow: hidden;
+}
+
