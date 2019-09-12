@@ -28,7 +28,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DatumPromene, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DatumPromene, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                @{ Html.EnableClientValidation(false); }
+                @Html.TextBoxFor(model => model.DatumPromene, "{dd/mm/yy}", new { @class = "form-control", @id = "datepicker", type = "text", @readonly = "true",  @required = "true"})
+                @{ Html.EnableClientValidation(true); }
             </div>
         </div>
 
@@ -69,17 +71,39 @@
     @Scripts.Render("~/bundles/bs-datepicker")
     @Scripts.Render("~/bundles/select2")
 
-    @*<script>
+    <script>
         $('#datepicker').datepicker({
             format: "dd/mm/yy",
             todayBtn: "linked",
-            language: "rs-latin"
+            language: "rs-latin",
+            forceParse: false
+        });
+
+        $('#datepicker').keypress(function(e) {
+            return false
         });
 
         $(document).ready(function() {
-            $('select').select2();
+            $('select').select2({
+              language: "sr"
+            });
         });
-    </script>*@
+
+        //$.validator.addMethod("dateFormat",
+        //function(value, element) {
+        //    return value.match(/^dd?-dd?-dd$/);
+        //},
+        //"Please enter a date in the format dd-mm-yyyy.");
+
+        //$("form").validate({
+        //    rules : {
+        //        DatumPromene : {
+        //            dateFormat: true
+        //        }
+        //    }
+        //});
+
+    </script>
 
 
 }

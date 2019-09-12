@@ -277,7 +277,8 @@
     <Content Include="Scripts\NGracunovodstvenePromene.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\select2.js" />
+    <Content Include="Scripts\select2\select2.js" />
+    <Content Include="Scripts\select2\sr.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

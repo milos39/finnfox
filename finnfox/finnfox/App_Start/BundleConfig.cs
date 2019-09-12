@@ -38,7 +38,8 @@ namespace finnfox
             bundles.Add(new ScriptBundle("~/bundles/chart").Include(
                       "~/Scripts/Chart.bundle.js"));
             bundles.Add(new ScriptBundle("~/bundles/select2").Include(
-                      "~/Scripts/select2.js"));
+                      "~/Scripts/select2/select2.js",
+                      "~/Scripts/select2/sr.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       //"~/Content/bootstrap.css",

@@ -1,11 +1,31 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
-@{
-    ViewBag.Title = "Error";
-}
-<div class="row">
-    <img src="~/Content/images/finnfox404.png" alt="error-image" />
-</div>
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Greška</title>
+    <link rel="stylesheet" href="~/Content/bootstrap-lumen.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body class="bg-pattern overflow-hidden">
+    @{
+        Layout = null;
+    }
 
+
+
+    @{
+        ViewBag.Title = "Error";
+    }
+    <div class="centered-vert-and-hor">
+        <img class="centered img-centered" src="~/Content/images/finnfox404.png" alt="error-image" />
+
+        <h1 class="text-danger text-center title-large">Greška</h1>
+        <h3 class="text-center subtitle-large">Izgleda da si se izgubio?</h3>
+        @Html.ActionLink("vrati me kući!", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary btn-large-centered" })
+    </div>
+
+</body>
+</html>

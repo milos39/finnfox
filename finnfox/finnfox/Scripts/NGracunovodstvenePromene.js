@@ -9,7 +9,7 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
             $("#godina-naslov").html("<span id='prikazanaGodina' class='hidden'>0</span>Kompletna finansijska istorija");
         } else {
             if (mesec === undefined || mesec == 0) {
-                console.log("mesec je" + mesec);
+                //console.log("mesec je" + mesec);
                 $("#godina-naslov").html("Finansije u <span id='prikazanaGodina'>" + godina + "</span>");
             } else {
                 $("#godina-naslov").html("Finansije u <span id='prikazaniMesec'>" + imenaMeseci[mesec-1] + "</span> <span id='prikazanaGodina'>" + godina + "</span> godine");
@@ -23,6 +23,12 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
             var tabela = $("#promeneTabela");
             $scope.promenePoGodini = result.data;
             $("#promeneTabela").bootstrapTable({ data: result.data.racunovodstvenePromene });
+            console.log(result.data.racunovodstvenePromene);
+            for (var i = 0; i < result.data.racunovodstvenePromene.length; i++) {
+                result.data.racunovodstvenePromene[i].Id = "<a href='RacunovodstvenaPromenas/edit/" + result.data.racunovodstvenePromene[i].Id + "'> ✏️ </a>" +
+                                                           "<a href='RacunovodstvenaPromenas/details/" + result.data.racunovodstvenePromene[i].Id + "'> 👀 </a>" +
+                                                           "<a href='RacunovodstvenaPromenas/delete/" + result.data.racunovodstvenePromene[i].Id + "'> 🗑️ </a>";
+            }
             tabela.bootstrapTable('load', result.data.racunovodstvenePromene);
             drawOrUpdateChart(godina, mesec);
             dinamicanNaslov(godina, mesec);
@@ -30,12 +36,12 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
 
         if (mesec === undefined || mesec == 0) {
             $http.get("http://localhost:1091/RacunovodstvenaPromenas/promenePoGodini?godina=" + godina).then(function (result) {
-                console.log(result);
+                //console.log(result);
                 popuniTabelu(result, godina, mesec);
             });
         } else {
             $http.get("http://localhost:1091/RacunovodstvenaPromenas/promenePoMesecu?godina=" + godina + "&mesec=" + mesec).then(function (result) {
-                console.log(result);
+                //console.log(result);
                 popuniTabelu(result, godina, mesec);
             });
         };
@@ -67,7 +73,7 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
         event.stopPropagation();
         var kliknutiMesec = $(this).attr("class");
         var izabranaGodina = $("#prikazanaGodina").html();
-        console.log(izabranaGodina);
+        //console.log(izabranaGodina);
         if (kliknutiMesec.length > 0 && kliknutiMesec.length < 3 ) {
             loadPromene(izabranaGodina, kliknutiMesec);
             //dinamicanNaslov(kliknutaGodina); HALP

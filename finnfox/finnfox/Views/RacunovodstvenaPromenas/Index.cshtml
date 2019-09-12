@@ -50,6 +50,7 @@
                     <th data-field="TipRacunovodstvenePromene" data-sortable="true">tip promene</th>
                     <th data-field="NazivPromene" data-sortable="true">naziv promene</th>
                     <th data-field="KolicinaNovca" data-sortable="true">vrednost</th>
+                    <th data-field="Id" data-sortable="false">akcije</th>
                 </tr>
             </thead>
             @*<tbody>
@@ -127,7 +128,7 @@
     function drawOrUpdateChart(godina, mesec) {
         
         if (mesec === undefined || mesec == 0) {
-            console.log("mesec je 0 ili undefined, da proverimo: " + mesec); 
+            //console.log("mesec je 0 ili undefined, da proverimo: " + mesec); 
             $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaChart?godina=" + godina, function (data, status) {
                 console.log(data);
 
@@ -137,7 +138,7 @@
                 drawChart(data);
             });
         } else {
-            console.log("mesec je broj: " + mesec); 
+            //console.log("mesec je broj: " + mesec); 
             $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaMesecChart?godina=" + godina + "&mesec=" + mesec, function (data, status) {
             console.log(data);
 
