@@ -69,7 +69,7 @@ namespace finnfox.Controllers
             List<string> kategorije = new List<string>();
 
             RacunovodstvenePromeneTipMesecViewModel viewModel = new RacunovodstvenePromeneTipMesecViewModel();
-            var querryResult = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == false).GroupBy(x => new {  x.DatumPromene.Month , x.TipRacunovodstvenePromene.NazivTipa }, (key, values) => new { mesec = key, vrednost = values.Sum(m => m.KolicinaNovca )}).ToList();
+            var querryResult = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == false && m.DatumPromene.Year == godina).GroupBy(x => new {  x.DatumPromene.Month , x.TipRacunovodstvenePromene.NazivTipa }, (key, values) => new { mesec = key, vrednost = values.Sum(m => m.KolicinaNovca )}).ToList();
                 
             foreach (var objekat in querryResult)
             {
