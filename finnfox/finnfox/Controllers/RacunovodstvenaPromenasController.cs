@@ -62,7 +62,7 @@ namespace finnfox.Controllers
 
            
             List<int> nizVrednosti = new List<int>();
-            var sviRashodi = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList();
+            var sviRashodi = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == false && m.DatumPromene.Year == godina).Select(m => m.TipRacunovodstvenePromene).Distinct().ToList();
             List<int> meseci = new List<int>();
             List<List<double>> vrednostiPoKategoriji = new List<List<double>>();
             List<double> vrednosti = new List<double>();
