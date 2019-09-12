@@ -419,6 +419,13 @@ namespace finnfox.Controllers
             return View();
         }
 
+        //GET: RacunovodstvenaPromenas/globalnaAnalitikas
+        [HttpGet]
+        public ActionResult globalnaAnalitika()
+        {
+            return View();
+        }
+
         // GET: RacunovodstvenaPromenas/Details/5
         public ActionResult Details(int? id)
         {
@@ -433,6 +440,9 @@ namespace finnfox.Controllers
             }
             return View(racunovodstvenaPromena);
         }
+
+
+       
 
         // GET: RacunovodstvenaPromenas/Create
         public ActionResult Create()

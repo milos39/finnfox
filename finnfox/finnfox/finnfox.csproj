@@ -323,6 +323,7 @@
     <Content Include="Views\TipRacunovodstvenePromenes\Edit.cshtml" />
     <Content Include="Views\TipRacunovodstvenePromenes\Index.cshtml" />
     <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\RacunovodstvenaPromenas\globalnaAnalitika.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
