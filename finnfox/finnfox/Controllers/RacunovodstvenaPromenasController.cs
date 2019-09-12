@@ -56,13 +56,7 @@ namespace finnfox.Controllers
 
 
 
-<<<<<<< Updated upstream
-        //public ActionResult globalnePromeneMesecTip(int godina)
-        //{
-        //    RacunovodstvenePromeneTipMesecViewModel viewModel = new RacunovodstvenePromeneTipMesecViewModel();
 
-        //    viewModel.meseci = db.RacunovodstvenaPromenas.Where(m => m.DatumPromene.Year == godina).Select(m => m.DatumPromene.Month).Distinct().ToList();
-=======
         public ActionResult globalnePromeneMesecTip(int godina)
         {
 
@@ -84,7 +78,6 @@ namespace finnfox.Controllers
 
               
             }
->>>>>>> Stashed changes
 
 
             foreach (var rashod in  sviRashodi)
@@ -129,7 +122,7 @@ namespace finnfox.Controllers
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
 
-        //}
+        }
 
 
         //GET: RacunovodstvenaPromenas/promenePoMesecu?godina=val&mesec=val
