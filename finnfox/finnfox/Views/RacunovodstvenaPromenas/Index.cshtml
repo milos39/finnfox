@@ -64,7 +64,6 @@
             <div class="col-md-4 col-md-offset-4">
                 <canvas id="myChart" width="200" height="200"></canvas>
             </div>
-
         </div>
 
 
@@ -179,16 +178,19 @@
 
 
     function drawOrUpdateChart(godina, mesec) {
-        if (mesec === undefined) {
+        
+        if (mesec === undefined || mesec == 0) {
+            console.log("mesec je 0 ili undefined, da proverimo: " + mesec); 
             $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaChart?godina=" + godina, function (data, status) {
-            console.log(data);
+                console.log(data);
 
-            if ($("#myChart").hasClass("chartjs-render-monitor")) {
-                myChart.destroy();
-            }
-            drawChart(data);
-        });
+                if ($("#myChart").hasClass("chartjs-render-monitor")) {
+                    myChart.destroy();
+                }
+                drawChart(data);
+            });
         } else {
+            console.log("mesec je broj: " + mesec); 
             $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaMesecChart?godina=" + godina + "&mesec=" + mesec, function (data, status) {
             console.log(data);
 
