@@ -95,14 +95,19 @@ namespace finnfox.Controllers
                         for (int i = 0; i < meseci.Count; i++)
                         {
 
-                             if( meseci[i] == objekat.mesec.Month)
+                             if( meseci[i] == objekat.mesec.Month )
                             {
-                                vrednosti.Add(objekat.vrednost);
+                                if (vrednosti.Count < meseci.Count)
+                                    vrednosti.Add(objekat.vrednost);
+                                else
+                                    vrednosti[i] = objekat.vrednost;
+
 
                             }
                              else
                             {
-                                vrednosti.Add(0);
+                                if (vrednosti.Count < meseci.Count )
+                                    vrednosti.Add(0);
                             }
 
                         }
