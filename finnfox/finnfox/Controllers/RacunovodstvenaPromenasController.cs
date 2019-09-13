@@ -266,7 +266,7 @@ namespace finnfox.Controllers
 
 
                 }
-                return Json(viewModel, JsonRequestBehavior.AllowGet)
+                return Json(viewModel, JsonRequestBehavior.AllowGet);
 
             }
             else
