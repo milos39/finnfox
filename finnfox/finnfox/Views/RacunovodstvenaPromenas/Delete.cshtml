@@ -11,13 +11,7 @@
     <h4>RacunovodstvenaPromena</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.UserLastName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.UserLastName)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.TipRacunovodstvenePromene.NazivTipa)
@@ -41,6 +35,15 @@
 
         <dd>
             @Html.DisplayFor(model => model.DatumPromene)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KolicinaNovca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KolicinaNovca)
         </dd>
 
     </dl>
