@@ -97,9 +97,9 @@ namespace finnfox.Models
              MinRequiredPasswordLength = 6,
              MinNonAlphanumericCharactersError = "Nemate alfanumericke karaktere",
              ErrorMessage = "mora: biti dugacka najmanje {2} slova, sadrzati minimum jednu cifru ( 0 - 9) i mora imati bar jedno veliko slovo ( A - Z). ",
-             MinPasswordLengthError = "Password mora imati najmanje 6 slova",
+             MinPasswordLengthError = "Lozinka mora imati najmanje 6 slova",
              PasswordStrengthError ="Mora imati karaktere od a do z",
-             UppercasePasswordErrorMessage = "Password mora imati minimum jedno veliko slovo"
+             UppercasePasswordErrorMessage = "Lozinka mora imati minimum jedno veliko slovo"
             
             )
              

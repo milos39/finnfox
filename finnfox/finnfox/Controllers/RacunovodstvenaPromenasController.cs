@@ -239,8 +239,7 @@ namespace finnfox.Controllers
                 var kategorije = db.TipRacunovodstvenePromenes.Where(m=>m.PozitivnostTipa == false).ToList();
                 double vrednostRacunaKategorija = 0;
 
-                if(ukupniPrihodi == 0)
-                {
+                
                     foreach (var kategorija in kategorije)
                     {
 
@@ -264,7 +263,7 @@ namespace finnfox.Controllers
 
 
 
-                    }
+                    
                     return Json(viewModel, JsonRequestBehavior.AllowGet);
 
                 }

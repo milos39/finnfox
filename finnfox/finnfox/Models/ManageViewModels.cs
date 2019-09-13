@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using finnfox.Extensions;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
@@ -43,18 +44,30 @@ namespace finnfox.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Trenutna lozinka")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} mora biti dugačka najmanje {2} slova.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nova lozinka")]
+        [MembershipExtension
+            (
+             MinRequiredPasswordLength = 6,
+             MinNonAlphanumericCharactersError = "Nemate alfanumericke karaktere",
+             ErrorMessage = "mora: biti dugacka najmanje {2} slova, sadrzati minimum jednu cifru ( 0 - 9) i mora imati bar jedno veliko slovo ( A - Z). ",
+             MinPasswordLengthError = "Lozinka mora imati najmanje 6 slova",
+             PasswordStrengthError = "Mora imati karaktere od a do z",
+             UppercasePasswordErrorMessage = "Lozinka mora imati minimum jedno veliko slovo"
+
+            )
+
+            ]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Potvrdite novu lozinku")]
+        [Compare("NewPassword", ErrorMessage = "Lozinke se ne poklapaju")]
         public string ConfirmPassword { get; set; }
     }
 
