@@ -32,8 +32,13 @@ namespace finnfox
                       "~/Scripts/bootstrap-table-hr-HR.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                      "~/Scripts/angular.js",
+                      "~/Scripts/angular.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular-racPromene").Include(
                       "~/Scripts/NGracunovodstvenePromene.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular-globalnaAnalitika").Include(
+                      "~/Scripts/NGglobalnaAnalitika.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/chart").Include(
                       "~/Scripts/Chart.bundle.js"));

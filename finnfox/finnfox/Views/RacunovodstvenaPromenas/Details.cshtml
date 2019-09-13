@@ -1,13 +1,13 @@
 ﻿@model finnfox.RacunovodstvenaPromena
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalji";
 }
 
-<h2>Details</h2>
+<h2>Detalji o promeni na računu</h2>
 
 <div>
-    <h4>RacunovodstvenaPromena</h4>
+    <h4>@Html.DisplayFor(model => model.NazivPromene)</h4>
     <hr />
     <dl class="dl-horizontal">
 
@@ -46,7 +46,10 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PromenaId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="align-with-dt clearfix">
+    @Html.ActionLink("Izmeni", "Edit","RacunovodstvenaPromenas", new { id = Model.PromenaId }, htmlAttributes: new { @class = "btn btn-default" })
+</div>
+
+@Html.ActionLink("⬅Nazad u listu promena", "Index")
+
+

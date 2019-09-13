@@ -212,3 +212,16 @@ a:hover, a:focus {
     overflow: hidden;
 }
 
+.align-with-dt {
+    margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+    .align-with-dt {
+        width: 160px;
+        display: block;
+    }
+    .align-with-dt a, .align-with-dt input{
+        float: right;
+    }
+}

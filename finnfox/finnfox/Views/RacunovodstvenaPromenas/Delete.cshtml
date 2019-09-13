@@ -1,14 +1,14 @@
 ﻿@model finnfox.RacunovodstvenaPromena
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Brisanje promene na racunu";
 }
 
-<h2>Delete</h2>
+<h2>Brisanje promene na racunu</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h4>Da li si siguran da želiš da obrišeš @Html.DisplayFor(model => model.NazivPromene)?</h4>
 <div>
-    <h4>RacunovodstvenaPromena</h4>
+    @*<h4>RacunovodstvenaPromena</h4>*@
     <hr />
     <dl class="dl-horizontal">
 
@@ -48,12 +48,16 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+    <div class="align-with-dt clearfix">
+        <input type="submit" value="Obriši promenu" class="btn btn-primary" />
+    </div>
+
+    @Html.ActionLink("⬅Nazad u listu promena", "Index")
+
+
     }
 </div>
