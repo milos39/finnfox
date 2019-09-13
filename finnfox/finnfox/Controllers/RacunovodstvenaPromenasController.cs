@@ -247,11 +247,18 @@ namespace finnfox.Controllers
                         
                         vrednostRacunaKategorija = db.RacunovodstvenaPromenas.Where(m => m.TipPromeneId == kategorija.TipPromeneId && m.DatumPromene.Year == godina && m.ApplicationUserId == userId).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
 
-                        double procenat = (vrednostRacunaKategorija / ukupniRashodi) * 100;
+
+                        double procenat = 0;
+                        string procenatString = "";
+                        if (ukupniPrihodi != 0)
+                        {
+                            procenat = (vrednostRacunaKategorija / ukupniPrihodi) * 100;
+                            procenatString = " - " + Math.Round(procenat, 2) + "%";
+                        }
 
                         if (vrednostRacunaKategorija != 0)
                         {
-                            viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa+" " + Math.Round(procenat,2 )+ "%" );
+                            viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa+ procenatString);
                             viewModel.kolicineNovcaPoTipu.Add(vrednostRacunaKategorija);
                         }
 
@@ -262,22 +269,9 @@ namespace finnfox.Controllers
 
                 }
 
+                procenatUstede(Usteda, ref viewModel, ukupniPrihodi);
 
-                if (Usteda > 0)
-                {
-                    double procenat = (Usteda / ukupniPrihodi) * 100;
-                    viewModel.nasloviSaProcentima.Add("ušteda - " + Math.Round(procenat, 2) + "%");
-                    viewModel.kolicineNovcaPoTipu.Add(Usteda);
-                }
-                else
-                {
-                    double procenat = ( (Usteda * -1) / ukupniPrihodi) * 100;
-                    viewModel.nasloviSaProcentima.Add("dugovanje - " + Math.Round(procenat, 2) + "%");
-                    viewModel.kolicineNovcaPoTipu.Add(Usteda);
-
-                }
-
-
+              
                 foreach (var kategorija in kategorije)
                 {
                     
@@ -286,10 +280,16 @@ namespace finnfox.Controllers
 
                     if(vrednostRacunaKategorija != 0)
                     {
-                        double procenat = (vrednostRacunaKategorija / ukupniPrihodi) * 100;
+                        double procenat = 0;
+                        string procenatString = "";
+                        if (ukupniPrihodi != 0)
+                        {
+                            procenat = (vrednostRacunaKategorija / ukupniPrihodi) * 100;
+                            procenatString = " - " + Math.Round(procenat, 2) + "%";
+                        }
 
 
-                        viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa + " - " + Math.Round(procenat, 2) + "%");
+                        viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa + procenat );
                         viewModel.kolicineNovcaPoTipu.Add(vrednostRacunaKategorija);
                     }
                    
@@ -317,19 +317,8 @@ namespace finnfox.Controllers
 
 
 
-                if (Usteda > 0)
-                {
-                    double procenat = (Usteda / ukupniPrihodi) * 100;
-                    viewModel.nasloviSaProcentima.Add("ušteda - " + Math.Round(procenat, 2) + "%");
-                    viewModel.kolicineNovcaPoTipu.Add(Usteda);
-                }
-                else
-                {
-                    double procenat = ((Usteda * -1) / ukupniPrihodi) * 100;
-                    viewModel.nasloviSaProcentima.Add("dugovanje - " + Math.Round(procenat, 2) + "%");
-                    viewModel.kolicineNovcaPoTipu.Add(Usteda);
+                procenatUstede(Usteda,ref viewModel, ukupniPrihodi);
 
-                }
 
                 foreach (var kategorija in kategorije)
                 {
@@ -339,10 +328,17 @@ namespace finnfox.Controllers
 
                     if (vrednostRacunaKategorija != 0)
                     {
-                        double procenat = (vrednostRacunaKategorija / ukupniPrihodi) * 100;
+
+                        double procenat = 0;
+                        string procenatString = "";
+                        if (ukupniPrihodi != 0)
+                        {
+                            procenat = (vrednostRacunaKategorija / ukupniPrihodi) * 100;
+                            procenatString = " - " + Math.Round(procenat, 2) + "%";
+                        }
 
 
-                        viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa + " - " + Math.Round(procenat, 2) + "%");
+                        viewModel.nasloviSaProcentima.Add(kategorija.NazivTipa + procenatString);
                         viewModel.kolicineNovcaPoTipu.Add(vrednostRacunaKategorija);
                     }
 
