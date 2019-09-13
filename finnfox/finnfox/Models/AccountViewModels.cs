@@ -89,7 +89,7 @@ namespace finnfox.Models
         //Passwords must have at least one non letter or digit character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').
 
         [Required(ErrorMessage = "polje {0} je obavezno")]
-        [StringLength(100, ErrorMessage = "{0} mora: biti dugacka najmanje {2} slova, sadrzati minimum jednu cifru ( 0 - 9) i mora imati bar jedno veliko slovo ( A - Z).", MinimumLength = 6)]
+      //  [StringLength(100, ErrorMessage = "{0} mora: biti dugacka najmanje {2} slova, sadrzati minimum jednu cifru ( 0 - 9) i mora imati bar jedno veliko slovo ( A - Z).", MinimumLength = 6)]
         //[DataType(DataType.Password, ErrorMessage = "Password nije u korektnom formatu")]
         [Display(Name = "Šifra")]
         [MembershipExtension
@@ -99,7 +99,9 @@ namespace finnfox.Models
              ErrorMessage = "mora: biti dugacka najmanje {2} slova, sadrzati minimum jednu cifru ( 0 - 9) i mora imati bar jedno veliko slovo ( A - Z). ",
              MinPasswordLengthError = "Lozinka mora imati najmanje 6 slova",
              PasswordStrengthError ="Mora imati karaktere od a do z",
-             UppercasePasswordErrorMessage = "Lozinka mora imati minimum jedno veliko slovo"
+             UppercasePasswordErrorMessage = "Lozinka mora imati minimum jedno veliko slovo",
+             NumberPasswordErrorMessage = "Lozinka mora imati minimum jednu cifru (0 - 9)",
+             LowercasePasswordErrorMessage = "Loznika mora imat minimum jedno malo slovo"
             
             )
              

@@ -13,6 +13,11 @@ namespace finnfox.Extensions
     {
         private string uppercasePasswordErrorMessage;
         public string UppercasePasswordErrorMessage { get => uppercasePasswordErrorMessage; set => uppercasePasswordErrorMessage = value; }
+        private string lowercasePasswordErrorMessage;
+        public string LowercasePasswordErrorMessage { get => lowercasePasswordErrorMessage; set => lowercasePasswordErrorMessage = value; }
+        private string numberPasswordErrorMessage;
+        public string NumberPasswordErrorMessage { get => numberPasswordErrorMessage; set => numberPasswordErrorMessage = value; }
+
 
         public MembershipExtension():base()
         {
@@ -28,13 +33,29 @@ namespace finnfox.Extensions
 
             if (((RegisterViewModel)validationContext.ObjectInstance).Password == null)
                 return null;
-            
+
+            ValidationResult validationResult = new ValidationResult("");
 
             if (!Regex.IsMatch(((RegisterViewModel)validationContext.ObjectInstance).Password, "[A-Z]"))
             {
-                return new ValidationResult(UppercasePasswordErrorMessage);
+                validationResult.ErrorMessage +=" "+ uppercasePasswordErrorMessage;
             }
-            return null;
+
+            if (!Regex.IsMatch(((RegisterViewModel)validationContext.ObjectInstance).Password, "[a-z]"))
+            {
+                validationResult.ErrorMessage +=" "+ lowercasePasswordErrorMessage;
+            }
+
+            if (!Regex.IsMatch(((RegisterViewModel)validationContext.ObjectInstance).Password, "[0-9]"))
+            {
+                validationResult.ErrorMessage +=" "+ numberPasswordErrorMessage;
+                
+            }
+
+            if (!string.IsNullOrEmpty(validationResult.ErrorMessage))
+                return validationResult;
+            else
+                return null;
 
 
         }

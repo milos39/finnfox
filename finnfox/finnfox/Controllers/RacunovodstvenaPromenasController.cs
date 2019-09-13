@@ -55,7 +55,56 @@ namespace finnfox.Controllers
 
 
 
+        public ActionResult globalniProcentiUstede()
+        {
 
+            List<int> godine = db.RacunovodstvenaPromenas.Select(m => m.DatumPromene.Year).Distinct().ToList();
+            List<int> meseci = db.RacunovodstvenaPromenas.Select(m => m.DatumPromene.Month).Distinct().ToList();
+            List<List<double>> listaVrednosti = new List<List<double>>();
+            List<double> vrednosti;
+
+            RacunovodstvenePromeneTipMesecViewModel viewModel = new RacunovodstvenePromeneTipMesecViewModel();
+            foreach (var godina in godine)
+            {
+                var prihodiPoMesecima = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == true && m.DatumPromene.Year == godina).GroupBy(x => x.DatumPromene.Month, (key, value) => new { mesec = key, vrenost = value.Sum(m => m.KolicinaNovca) });
+                var rashodiPoMesecima = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == false && m.DatumPromene.Year == godina).GroupBy(x => x.DatumPromene.Month, (key, value) => new { mesec = key, vrenost = value.Sum(m => m.KolicinaNovca) });
+                vrednosti = new List<double>();
+                for (int i = 0; i < meseci.Count; i++)
+                {
+                    var prihodZaMesec = 0.0;
+                    var rashodZaMesec = 0.0;
+                  
+                    var mesec = meseci[i];
+
+                    prihodZaMesec = prihodiPoMesecima.Where(m => m.mesec == mesec).Select(m => m.vrenost).DefaultIfEmpty(0).SingleOrDefault();
+                    rashodZaMesec = rashodiPoMesecima.Where(m => m.mesec == mesec).Select(m => m.vrenost).DefaultIfEmpty(0).SingleOrDefault();
+                   
+
+
+
+
+
+
+                    var usteda = prihodZaMesec - rashodZaMesec;
+                    var procenatUstede = -100.00;
+
+                    if (prihodZaMesec != 0)
+                      procenatUstede = usteda / prihodZaMesec;
+
+                    vrednosti.Add(Math.Round(procenatUstede, 2));
+                }
+                listaVrednosti.Add(vrednosti);
+            }
+
+
+            viewModel.kategorije = godine.Select(m => m.ToString() ).ToList();
+            viewModel.meseci = meseci;
+            viewModel.vrednostiPoKategoriji = listaVrednosti;
+
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
+            
+        }
 
 
 
