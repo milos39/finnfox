@@ -20,6 +20,23 @@ namespace finnfox.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+
+
+        public ActionResult balansKorisnika()
+        {
+            var userId = User.Identity.GetUserId();
+            var prihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Sum(m => m.KolicinaNovca);
+            var rashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Sum(m => m.KolicinaNovca);
+
+            var balans = prihodi - rashodi;
+
+
+            return Json(prihodi, JsonRequestBehavior.AllowGet);
+
+        }
+
+
         private void procenatUstede(  double Usteda, ref PieChartViewModel viewModel, double ukupniPrihodi )
         {
 
