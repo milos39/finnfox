@@ -53,8 +53,14 @@ namespace finnfox.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult godineSviKorisnici ()
+        {
+            return Json(db.RacunovodstvenaPromenas.Select(m => m.DatumPromene.Year).Distinct().ToList(), JsonRequestBehavior.AllowGet);
+        }
 
 
+        [HttpGet]
         public ActionResult globalniProcentiUstede()
         {
 
@@ -69,38 +75,31 @@ namespace finnfox.Controllers
                 var prihodiPoMesecima = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == true && m.DatumPromene.Year == godina).GroupBy(x => x.DatumPromene.Month, (key, value) => new { mesec = key, vrenost = value.Sum(m => m.KolicinaNovca) });
                 var rashodiPoMesecima = db.RacunovodstvenaPromenas.Where(m => m.TipRacunovodstvenePromene.PozitivnostTipa == false && m.DatumPromene.Year == godina).GroupBy(x => x.DatumPromene.Month, (key, value) => new { mesec = key, vrenost = value.Sum(m => m.KolicinaNovca) });
                 vrednosti = new List<double>();
+
                 for (int i = 0; i < meseci.Count; i++)
                 {
                     var prihodZaMesec = 0.0;
                     var rashodZaMesec = 0.0;
                   
-                    var mesec = meseci[i];
-
-                    prihodZaMesec = prihodiPoMesecima.Where(m => m.mesec == mesec).Select(m => m.vrenost).DefaultIfEmpty(0).SingleOrDefault();
-                    rashodZaMesec = rashodiPoMesecima.Where(m => m.mesec == mesec).Select(m => m.vrenost).DefaultIfEmpty(0).SingleOrDefault();
+                    var trenutniMesec = meseci[i];
+                
+                    prihodZaMesec = prihodiPoMesecima.Where(m => m.mesec == trenutniMesec).Select(m => m.vrenost).DefaultIfEmpty(0).SingleOrDefault();
+                    rashodZaMesec = rashodiPoMesecima.Where(m => m.mesec == trenutniMesec).Select(m => m.vrenost).DefaultIfEmpty(0).SingleOrDefault();
                    
-
-
-
-
-
-
                     var usteda = prihodZaMesec - rashodZaMesec;
                     var procenatUstede = -100.00;
 
                     if (prihodZaMesec != 0)
                       procenatUstede = usteda / prihodZaMesec;
 
-                    vrednosti.Add(Math.Round(procenatUstede, 2));
+                      vrednosti.Add(Math.Round(procenatUstede, 2));
                 }
                 listaVrednosti.Add(vrednosti);
             }
 
-
             viewModel.kategorije = godine.Select(m => m.ToString() ).ToList();
             viewModel.meseci = meseci;
             viewModel.vrednostiPoKategoriji = listaVrednosti;
-
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
             
@@ -181,7 +180,7 @@ namespace finnfox.Controllers
         }
 
 
-        //GET: RacunovodstvenaPromenas/promenePoMesecu?godina=val&mesec=val
+        //GET: RacunovodstvenaPromenas/promenePoMesecu?godina=val&trenutniMesec=val
         public ActionResult promenePoMesecu(int godina,int mesec)
         {
             ListRacunovodstvenaPromenaMesecViewModel viewModel = new ListRacunovodstvenaPromenaMesecViewModel();
@@ -220,7 +219,7 @@ namespace finnfox.Controllers
             return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
-        //GET: RacunovodstvenaPromenas/godinaMesecChart?godina=val&mesec=val
+        //GET: RacunovodstvenaPromenas/godinaMesecChart?godina=val&trenutniMesec=val
         [HttpGet]
         public ActionResult godinaMesecChart (int godina,int mesec)
         {

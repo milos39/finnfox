@@ -30,6 +30,7 @@ namespace finnfox.Extensions
 
             var property = validationContext.ObjectType.GetProperty(UppercasePasswordErrorMessage);
 
+            bool flag = false;
 
             if (((RegisterViewModel)validationContext.ObjectInstance).Password == null)
                 return null;
@@ -39,17 +40,39 @@ namespace finnfox.Extensions
             if (!Regex.IsMatch(((RegisterViewModel)validationContext.ObjectInstance).Password, "[A-Z]"))
             {
                 validationResult.ErrorMessage +=" "+ uppercasePasswordErrorMessage;
+                flag = true;
             }
 
             if (!Regex.IsMatch(((RegisterViewModel)validationContext.ObjectInstance).Password, "[a-z]"))
             {
-                validationResult.ErrorMessage +=" "+ lowercasePasswordErrorMessage;
+                
+
+                if (flag)
+                {
+                    lowercasePasswordErrorMessage = "i jednu cifru (0 - 9)";
+                    validationResult.ErrorMessage += " "+ lowercasePasswordErrorMessage;
+                }
+                else
+                {
+                    validationResult.ErrorMessage += lowercasePasswordErrorMessage;
+                }
+                flag = true;
             }
 
             if (!Regex.IsMatch(((RegisterViewModel)validationContext.ObjectInstance).Password, "[0-9]"))
             {
-                validationResult.ErrorMessage +=" "+ numberPasswordErrorMessage;
-                
+                if (flag)
+                {
+                    numberPasswordErrorMessage = "i jedan broj (0 - 9)";
+                    validationResult.ErrorMessage += " " + numberPasswordErrorMessage;
+                }
+                else
+                {
+                    validationResult.ErrorMessage +=  numberPasswordErrorMessage;
+                }
+
+
+
             }
 
             if (!string.IsNullOrEmpty(validationResult.ErrorMessage))
