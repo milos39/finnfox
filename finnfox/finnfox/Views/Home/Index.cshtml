@@ -1,39 +1,101 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@{
     ViewBag.Title = "Home Page";
 }
 
 <button id="click" name="click">KLIKNI ME </button>
 <button id="whack" name="click">KLIKNI ME 2 </button>
+<div class="page-header">
+    <h1>Zdravo @User.Identity.GetUserName() !👋 <small>Tvoj balans je 4000 💰</small></h1>
+</div>
+<div class="row mt-70">
+    <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+            <a href="/RacunovodstvenaPromenas">
+                <div class="panel-heading">
+                    <h4>Promene na računu</h4>
+                </div>
+                <div class="panel-body">
+                    <img src="~/Content/images/promene.png" alt="promene-na-racunu" />
+                </div>
+            </a>
+            <div class="panel-footer">
+                @Html.ActionLink("Promene na računu", "Index", "RacunovodstvenaPromenas", null, htmlAttributes: new { @class = "btn btn-primary" })
+                @Html.ActionLink("Nova promena", "Create", "RacunovodstvenaPromenas", null, htmlAttributes: new { @class = "btn btn-default ml-4" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+            <a href="/TipRacunovodstvenePromenes">
+                <div class="panel-heading">
+                    <h4>Tipovi promena na računu</h4>
+                </div>
+                <div class="panel-body">
+                    <img src="~/Content/images/kategorije.png" alt="kategorije-promena-na-racunu" />
+                </div>
+            </a>
+            <div class="panel-footer">
+                @Html.ActionLink("tipovi promena", "Index", "TipRacunovodstvenePromenes", null, htmlAttributes: new { @class = "btn btn-primary" })
+                @Html.ActionLink("Novi tip promene", "Create", "TipRacunovodstvenePromenes", null, htmlAttributes: new { @class = "btn btn-default ml-4" })
+            </div>
+        </div>
+        </a>
+    </div>
 
 
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+            <a href="/RacunovodstvenaPromenas/globalnaAnalitika">
+                <div class="panel-heading">
+                    <h4>Globalna analitika korisnika</h4>
+                </div>
+                <div class="panel-body">
+                    <img src="~/Content/images/globalna-analitika.png" alt="globalna analitika" />
+                </div>
+            </a>
+            <div class="panel-footer">
+                @Html.ActionLink("globalna analitika📈", "globalnaAnalitika", "RacunovodstvenaPromenas", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+
+
+
+
+
+
+@*<div class="jumbotron">
+        <h1>ASP.NET</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@
 
 
 

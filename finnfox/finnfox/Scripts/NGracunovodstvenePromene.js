@@ -23,7 +23,7 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
             var tabela = $("#promeneTabela");
             $scope.promenePoGodini = result.data;
             $("#promeneTabela").bootstrapTable({ data: result.data.racunovodstvenePromene });
-            console.log(result.data.racunovodstvenePromene);
+            //console.log(result.data.racunovodstvenePromene);
             for (var i = 0; i < result.data.racunovodstvenePromene.length; i++) {
                 result.data.racunovodstvenePromene[i].Id = "<a href='RacunovodstvenaPromenas/edit/" + result.data.racunovodstvenePromene[i].Id + "'> ✏️ </a>" +
                                                            "<a href='RacunovodstvenaPromenas/details/" + result.data.racunovodstvenePromene[i].Id + "'> 👀 </a>" +
@@ -38,11 +38,13 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
             $http.get("http://localhost:1091/RacunovodstvenaPromenas/promenePoGodini?godina=" + godina).then(function (result) {
                 //console.log(result);
                 popuniTabelu(result, godina, mesec);
+                $scope.balans = result.data.balans;
             });
         } else {
             $http.get("http://localhost:1091/RacunovodstvenaPromenas/promenePoMesecu?godina=" + godina + "&mesec=" + mesec).then(function (result) {
                 //console.log(result);
                 popuniTabelu(result, godina, mesec);
+                $scope.balans = result.data.balans;
             });
         };
     }

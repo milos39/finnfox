@@ -37,6 +37,8 @@
             </ul>
         </div>
 
+        <span class="balance">balans: {{ balans }}</span>
+
         <table id="promeneTabela"
                data-search="true"
                data-show-columns="true"
@@ -76,6 +78,13 @@
 @section Scripts {
 
     <script>
+        if ($(".balance")[0].innerHTML < 0) {
+            $(".balance").addClass("balance-negative");
+        } else {
+            $(".balance").addClass("balance-positive");
+        }
+        
+
         var myChart;
         function addData(chart, label, data) {
             chart.data.labels = label;

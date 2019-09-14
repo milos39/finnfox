@@ -55,6 +55,9 @@ namespace finnfox
                       "~/Content/select2.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/switch").Include(
+                      "~/Content/switch.css"));
+
 
         }
     }

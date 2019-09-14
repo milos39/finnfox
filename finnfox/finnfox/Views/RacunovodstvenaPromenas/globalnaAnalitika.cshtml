@@ -2,21 +2,53 @@
 @{
     ViewBag.Title = "Globalna Analitika";
 }
-    <div ng-app="globalnaAnalitika">
-        <div id="global-ctrl-wrapper" ng-controller="globalnaAnalitikaController">
-            <h2>Globalna Analitika</h2>
-            <button id="test2019" onclick="angular.element(document.getElementById('global-ctrl-wrapper')).scope().drawOrUpdateStackedBarChart(2019)">test 2019</button>
-            <button id="submit" onclick="angular.element(document.getElementById('global-ctrl-wrapper')).scope().submit(7)">Submit</button>
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <canvas id="globalChartCanvas" width="200" height="200"></canvas>
+<div ng-app="globalnaAnalitika">
+    <div id="global-ctrl-wrapper" ng-controller="globalnaAnalitikaController">
+        <div class="row mt-70">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="nav-item active" role="presentation">
+                    <a class="nav-link" data-toggle="tab" href="#raspodela-troskova">Raspodela troškova korisnika</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" data-toggle="tab" href="#prosecna-usteda">Prosečna ušteda korisnika</a>
+                </li>
+            </ul>
+        </div>
+        <h2>Globalna Analitika</h2>
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="raspodela-troskova">
+                <h4>Raspodela troškova po kategorijama FinnFox korisnika</h4>
+
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="godineUsistemuGlobal" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span id="selected-year">{{currentYear}}</span>  
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="godineUsistemuGlobal" id="godine-dropdown-global">
+                        <li ng-repeat="godina in godineSviKorisnici"><a class="{{godina}}" href="#">{{godina}}</a></li>
+                    </ul>
+                </div>
+
+                @*<button id="submit" onclick="angular.element(document.getElementById('global-ctrl-wrapper')).scope().submit(7)">Submit</button>*@
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <canvas id="globalBarChartCanvas" width="200" height="200"></canvas>
+                    </div>
                 </div>
             </div>
 
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
-                <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+            <div class="tab-pane" id="prosecna-usteda">
+                <h4>Prosečna štednja FinnFox korisnika po mesecima</h4>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <canvas id="globalLineChartCanvas" width="200" height="200"></canvas>
+                    </div>
+                </div>
             </div>
+        </div>
+
+
+
 
             @section Scripts {
                 @Scripts.Render("~/bundles/jquery")
@@ -25,10 +57,9 @@
                 @Scripts.Render("~/bundles/chart")
 
                 <script>
-                                                    //$("#test2019").click(function () {
-                                                    //    drawOrUpdateStackedBarChart(2019);
-                                                    //});
+                                            //angular.element(document.getElementById('global-ctrl-wrapper')).scope().drawOrUpdateStackedBarChart(2019);
+
                 </script>
             }
         </div>
-    </div>
+</div>

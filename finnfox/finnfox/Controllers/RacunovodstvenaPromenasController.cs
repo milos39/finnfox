@@ -90,7 +90,7 @@ namespace finnfox.Controllers
                     var procenatUstede = -100.00;
 
                     if (prihodZaMesec != 0)
-                      procenatUstede = usteda / prihodZaMesec;
+                      procenatUstede = (usteda / prihodZaMesec) * 100;
 
                       vrednosti.Add(Math.Round(procenatUstede, 2));
                 }

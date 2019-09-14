@@ -115,6 +115,10 @@ a:hover, a:focus {
     margin-top: 70px;
 }
 
+.mt-30 {
+    margin-top: 30px;
+}
+
 .ml-4 {
     margin-left: 4px;
 }
@@ -216,6 +220,83 @@ a:hover, a:focus {
     margin-bottom: 30px;
 }
 
+.nav-tabs.nav-justified > .active > a{
+    font-weight: 900;
+}
+
+#logo-centered {
+    display: block;
+    margin: 30px auto 10px auto;
+    width: 40%;
+    max-width: 180px;
+}
+
+.nav-logotype {
+    width: 120px;
+    margin-top: 8px;
+}
+
+.balance {
+    float: right;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    color: #000;
+    padding: 9px 12px 7px;
+    border-width: 0 1px 4px 1px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.balance-positive {
+    background-color: #5ed962;
+    border-color: #14ac19;
+}
+
+.balance-negative {
+    background-color: #ff6464;
+    border-color: #a55;
+}
+
+.panel-body img {
+    display: block;
+    width: 60%;
+    margin: 10px auto;
+}
+
+.panel-footer .btn{
+    display: inline-block;
+}
+
+.panel {
+    box-shadow: 0px 22px 29px -10px rgba(0,0,0,0.3);
+}
+
+.panel-heading h4 {
+    font-family: Verdana;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 29px;
+    font-family: "Helvetica";
+    letter-spacing: -0.7px;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 29px;
+    font-family: "Helvetica";
+    letter-spacing: -0.7px;
+    font-weight: 900;
+}
+
+.page-header small{
+    float:none;
+}
+
+
 @media (min-width: 768px) {
     .align-with-dt {
         width: 160px;
@@ -224,4 +305,8 @@ a:hover, a:focus {
     .align-with-dt a, .align-with-dt input{
         float: right;
     }
+    .page-header small {
+        float: right;
+    }
 }
+

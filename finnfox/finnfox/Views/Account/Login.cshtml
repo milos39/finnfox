@@ -41,13 +41,15 @@
                         <input type="submit" value="Prijavi se" class="btn btn-primary" />
                     </div>
                 </div>
-                <div class="mt-70">
+                <div class="mt-30">
                     @Html.ActionLink("Nemaš nalog? Registruj se!", "Register", "Account", null, htmlAttributes: new { @class = "btn btn-default" })
                 </div>
+                <hr />
+                <img src="~/Content/images/finFox-logo.png" alt="FinnFox-logo" id="logo-centered" />
                 @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+            <p>
+                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+            </p>*@
             }
         </section>
     </div>

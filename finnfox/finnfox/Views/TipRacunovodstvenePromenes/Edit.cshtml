@@ -1,5 +1,5 @@
 ﻿@model finnfox.TipRacunovodstvenePromene
-
+@Styles.Render("~/Content/switch")
 @{
     ViewBag.Title = "Edit";
 }
@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>finansijske promene</h4>
         <hr />
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PozitivnostTipa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <span class="col-md-2 control-label">Prihod / Rashod</span>
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.PozitivnostTipa)
@@ -48,5 +48,13 @@
 </div>
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var checkBox = $("#PozitivnostTipa");
+
+        $("<label class='label-for-switch' for='PozitivnostTipa'>Prihod / Rashod</label>").insertAfter(checkBox);
+
+    </script>
 }

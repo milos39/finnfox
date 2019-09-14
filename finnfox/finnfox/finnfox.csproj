@@ -244,11 +244,17 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Chart.css" />
+    <Content Include="Content\images\finFox-logo.png" />
     <Content Include="Content\images\finnfox-bg.png" />
     <Content Include="Content\images\finnfox-bg50.png" />
+    <Content Include="Content\images\finnFox-logoWhite.png" />
     <Content Include="Content\images\finnfox404.png" />
+    <Content Include="Content\images\globalna-analitika.png" />
+    <Content Include="Content\images\kategorije.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\promene.png" />
     <Content Include="Content\select2.css" />
+    <Content Include="Content\switch.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
