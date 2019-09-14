@@ -22,7 +22,7 @@ namespace finnfox.Controllers
 
 
 
-
+        
         public ActionResult balansKorisnika()
         {
             var userId = User.Identity.GetUserId();
@@ -32,7 +32,7 @@ namespace finnfox.Controllers
             var balans = prihodi - rashodi;
 
 
-            return Json(prihodi, JsonRequestBehavior.AllowGet);
+            return Json(balans, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -442,6 +442,8 @@ namespace finnfox.Controllers
                         Valuta = model.Valuta
                     });
                 }
+
+                  
 
 
                 viewModel.godine = db.RacunovodstvenaPromenas.Where(m=>m.ApplicationUserId == userId).Select(m => m.DatumPromene.Year).Distinct().ToList();
