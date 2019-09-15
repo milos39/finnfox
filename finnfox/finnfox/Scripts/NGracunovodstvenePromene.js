@@ -2,6 +2,19 @@
 
 app.controller('racunovodstvenePromeneController', function ($scope, $http) {
 
+    function balanceColor(balanceValue) {
+        if (balanceValue < 0) {
+            console.log("balans negativan jer je: " + balanceValue);
+            $("#balance").addClass("balance-negative");
+            $("#balance").removeClass("balance-positive");
+        } else {
+            console.log("balans pozitivan jer je: " + balanceValue);
+            $("#balance").addClass("balance-positive");
+            $("#balance").removeClass("balance-negative");
+        };
+    };
+    //balanceColor();
+
     function dinamicanNaslov(godina, mesec) {
         //console.log("dinamicki naslov parametar je: " + godina)
         var imenaMeseci = ["januaru", "februaru", "martu", "aprilu", "maju", "junu", "julu", "avgustu", "septembru", "oktobru", "novembru", "decembru"];
@@ -15,7 +28,7 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
                 $("#godina-naslov").html("Finansije u <span id='prikazaniMesec'>" + imenaMeseci[mesec-1] + "</span> <span id='prikazanaGodina'>" + godina + "</span> godine");
             }
         }
-    }
+    };
 
     function loadPromene(godina, mesec) {
         godina = godina || 0;
@@ -33,21 +46,34 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
             drawOrUpdateChart(godina, mesec);
             dinamicanNaslov(godina, mesec);
         };
-
-        if (mesec === undefined || mesec == 0) {
+        if (godina == 0) {
             $http.get("http://localhost:1091/RacunovodstvenaPromenas/promenePoGodini?godina=" + godina).then(function (result) {
-                //console.log(result);
                 popuniTabelu(result, godina, mesec);
-                $scope.balans = result.data.balans;
+            });
+            $http.get("http://localhost:1091/RacunovodstvenaPromenas/balansKorisnika").then(function (response) {
+                $scope.balans = response.data;
+                balanceColor(response.data);
+                //console.log(response.data);
             });
         } else {
-            $http.get("http://localhost:1091/RacunovodstvenaPromenas/promenePoMesecu?godina=" + godina + "&mesec=" + mesec).then(function (result) {
-                //console.log(result);
-                popuniTabelu(result, godina, mesec);
-                $scope.balans = result.data.balans;
-            });
+            if (mesec === undefined || mesec == 0) {
+                $http.get("http://localhost:1091/RacunovodstvenaPromenas/promenePoGodini?godina=" + godina).then(function (result) {
+                    popuniTabelu(result, godina, mesec);
+                    $scope.balans = result.data.balans;
+                    balanceColor(result.data.balans);
+                });
+
+            } else {
+                $http.get("http://localhost:1091/RacunovodstvenaPromenas/promenePoMesecu?godina=" + godina + "&mesec=" + mesec).then(function (result) {
+                    //console.log(result);
+                    popuniTabelu(result, godina, mesec);
+                    $scope.balans = result.data.balans;
+                    balanceColor(result.data.balans);
+                });
+            };
         };
-    }
+
+    };
     loadPromene();
 
 

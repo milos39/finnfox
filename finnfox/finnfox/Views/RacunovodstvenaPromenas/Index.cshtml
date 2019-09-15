@@ -10,10 +10,10 @@
         @Html.ActionLink("+ Kreiraj novu promenu", "Create", "RacunovodstvenaPromenas", null, htmlAttributes: new { @class = "btn btn-primary" })
 
         @*<button class="btn btn-primary" id="updateTable">
-                update table
+                update balans
             </button>
             <input type="number" id="godinaTest" />
-            <p id="nizDemo"></p>*@
+            <p id="balansDemo">{{ balans }}</p>*@
 
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="godineUsistemu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -37,7 +37,7 @@
             </ul>
         </div>
 
-        <span class="balance">balans: {{ balans }}</span>
+        <span id="balance">balans: <span>{{ balans }}</span>💰</span>
 
         <table id="promeneTabela"
                data-search="true"
@@ -78,11 +78,16 @@
 @section Scripts {
 
     <script>
-        if ($(".balance")[0].innerHTML < 0) {
-            $(".balance").addClass("balance-negative");
-        } else {
-            $(".balance").addClass("balance-positive");
-        }
+
+        //function balanceColor(){
+        //    if ($(".balance")[0].innerHTML < 0) {
+        //    $(".balance").addClass("balance-negative");
+        //    } else {
+        //        $(".balance").addClass("balance-positive");
+        //    };
+        //};
+        //balanceColor();
+        
         
 
         var myChart;
@@ -139,7 +144,7 @@
             if (mesec === undefined || mesec == 0) {
                 //console.log("mesec je 0 ili undefined, da proverimo: " + mesec);
                 $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaChart?godina=" + godina, function (data, status) {
-                    console.log(data);
+                    //console.log(data);
 
                     if ($("#myChart").hasClass("chartjs-render-monitor")) {
                         myChart.destroy();
@@ -149,7 +154,7 @@
             } else {
                 //console.log("mesec je broj: " + mesec);
                 $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaMesecChart?godina=" + godina + "&mesec=" + mesec, function (data, status) {
-                    console.log(data);
+                    //console.log(data);
 
                     if ($("#myChart").hasClass("chartjs-render-monitor")) {
                         myChart.destroy();
