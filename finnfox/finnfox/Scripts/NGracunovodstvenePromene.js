@@ -39,7 +39,7 @@ app.controller('racunovodstvenePromeneController', function ($scope, $http) {
             //console.log(result.data.racunovodstvenePromene);
             for (var i = 0; i < result.data.racunovodstvenePromene.length; i++) {
                 result.data.racunovodstvenePromene[i].Id = "<a href='RacunovodstvenaPromenas/edit/" + result.data.racunovodstvenePromene[i].Id + "'> ✏️ </a>" +
-                                                           "<a href='RacunovodstvenaPromenas/details/" + result.data.racunovodstvenePromene[i].Id + "'> 👀 </a>" +
+                                                           "<a href='RacunovodstvenaPromenas/details/" + result.data.racunovodstvenePromene[i].Id + "'> 🔎 </a>" +
                                                            "<a href='RacunovodstvenaPromenas/delete/" + result.data.racunovodstvenePromene[i].Id + "'> 🗑️ </a>";
             }
             tabela.bootstrapTable('load', result.data.racunovodstvenePromene);
