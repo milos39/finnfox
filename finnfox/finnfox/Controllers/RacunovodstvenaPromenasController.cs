@@ -25,14 +25,26 @@ namespace finnfox.Controllers
         
         public ActionResult balansKorisnika()
         {
-            var userId = User.Identity.GetUserId();
-            var prihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Sum(m => m.KolicinaNovca);
-            var rashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Sum(m => m.KolicinaNovca);
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                var prihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Sum(m => m.KolicinaNovca);
+                var rashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Sum(m => m.KolicinaNovca);
 
-            var balans = prihodi - rashodi;
+                var balans = prihodi - rashodi;
+                return Json(balans, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                var balans = 0;
+                return Json(balans, JsonRequestBehavior.AllowGet);
 
 
-            return Json(balans, JsonRequestBehavior.AllowGet);
+            }
+
+
+
 
         }
 
