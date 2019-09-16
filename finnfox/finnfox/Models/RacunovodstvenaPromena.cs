@@ -28,6 +28,9 @@ namespace finnfox
         public DateTime DatumPromene { get; set; }
 
 
+
+
+        [Required(ErrorMessage = "Polje {0} je obavezno")]
         [Display(Name = "Tip promene")]
         public int TipPromeneId { get; set; }
 
