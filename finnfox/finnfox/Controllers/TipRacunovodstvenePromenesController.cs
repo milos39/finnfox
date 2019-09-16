@@ -52,12 +52,22 @@ namespace finnfox.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "TipPromeneId,NazivTipa,PozitivnostTipa")] TipRacunovodstvenePromene tipRacunovodstvenePromene)
         {
-            if (ModelState.IsValid)
+            if(!db.TipRacunovodstvenePromenes.Where( m=>m.NazivTipa.ToLower() == tipRacunovodstvenePromene.NazivTipa.ToLower() ).Any() )
             {
-                db.TipRacunovodstvenePromenes.Add(tipRacunovodstvenePromene);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.TipRacunovodstvenePromenes.Add(tipRacunovodstvenePromene);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+
+            else
+            {
+                ViewBag.ErrorMsg = "Ovaj tip racunovodstvene promene vec postoji";
+                return View("Create");
+            }
+            
 
             return View(tipRacunovodstvenePromene);
         }
@@ -113,10 +123,20 @@ namespace finnfox.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             TipRacunovodstvenePromene tipRacunovodstvenePromene = db.TipRacunovodstvenePromenes.Find(id);
-            db.TipRacunovodstvenePromenes.Remove(tipRacunovodstvenePromene);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (!db.RacunovodstvenaPromenas.Where(m => m.TipPromeneId == id).Any())
+            {
+                db.TipRacunovodstvenePromenes.Remove(tipRacunovodstvenePromene);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.ErroMsg = "Ne mozete brisati tipove promena koji sadrze promene";
+                return RedirectToAction("Delete", new { id = id } );
+            }
+
         }
 
         protected override void Dispose(bool disposing)
