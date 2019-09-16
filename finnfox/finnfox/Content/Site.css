@@ -123,7 +123,7 @@ a:hover, a:focus {
     margin-left: 4px;
 }
 
-#login-form {
+#login-form, #register-form {
     background-color: #f9f9f9;
     padding: 20px;
     margin-top: 60px;
@@ -302,6 +302,10 @@ h2 {
     margin-left: 0;
 }
 
+#loginLink:hover{
+    margin-top:70px;
+}
+
 
 @media (min-width: 768px) {
     .align-with-dt {
@@ -315,4 +319,12 @@ h2 {
         float: right;
     }
 }
+
+@media (max-width: 768px) {
+    #login-form, #register-form {
+        margin: 20px;
+    }
+}
+
+
 
