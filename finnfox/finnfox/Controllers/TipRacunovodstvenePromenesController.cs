@@ -64,7 +64,7 @@ namespace finnfox.Controllers
 
             else
             {
-                ViewBag.ErrorMsg = "Ovaj tip racunovodstvene promene vec postoji";
+                ViewBag.ErrorMsg = "Ovaj tip promene na računu već postoji";
                 return View("Create");
             }
             
@@ -133,7 +133,7 @@ namespace finnfox.Controllers
             }
             else
             {
-                ViewBag.ErroMsg = "Ne mozete brisati tipove promena koji sadrze promene";
+                ViewBag.ErrorMsg = "Ne mozete brisati tipove promena koji sadrze promene";
                 return RedirectToAction("Delete", new { id = id } );
             }
 
