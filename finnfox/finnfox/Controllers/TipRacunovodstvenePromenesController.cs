@@ -134,7 +134,7 @@ namespace finnfox.Controllers
             else
             {
                 ViewBag.ErrorMsg = "Ne mozete brisati tipove promena koji sadrze promene";
-                return RedirectToAction("Delete", new { id = id } );
+                return View("Delete", new { id = id } );
             }
 
         }
