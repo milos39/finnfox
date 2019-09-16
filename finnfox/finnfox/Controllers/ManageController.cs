@@ -238,7 +238,8 @@ namespace finnfox.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                
+                return RedirectToAction("Index", new { Message = "Lozinka uspešno promenjena" });
             }
             AddErrors(result);
             return View(model);
