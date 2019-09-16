@@ -28,8 +28,8 @@ namespace finnfox.Controllers
             try
             {
                 var userId = User.Identity.GetUserId();
-                var prihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Sum(m => m.KolicinaNovca);
-                var rashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Sum(m => m.KolicinaNovca);
+                var prihodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == true).Select(m=>m.KolicinaNovca).DefaultIfEmpty(0).Sum();
+                var rashodi = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.TipRacunovodstvenePromene.PozitivnostTipa == false).Select(m => m.KolicinaNovca).DefaultIfEmpty(0).Sum();
 
                 var balans = prihodi - rashodi;
                 return Json(balans, JsonRequestBehavior.AllowGet);
@@ -37,9 +37,7 @@ namespace finnfox.Controllers
             }
             catch (Exception)
             {
-                var balans = 0;
-                return Json(balans, JsonRequestBehavior.AllowGet);
-
+                throw;
 
             }
 
