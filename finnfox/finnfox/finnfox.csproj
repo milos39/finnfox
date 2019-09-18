@@ -199,6 +199,7 @@
     <Compile Include="Controllers\TipRacunovodstvenePromenesController.cs" />
     <Compile Include="Extensions\EmailExtensionAttribute.cs" />
     <Compile Include="Extensions\IdentityExtenstions.cs" />
+    <Compile Include="Extensions\MembershipChangePasswordExtension.cs" />
     <Compile Include="Extensions\MembershipExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

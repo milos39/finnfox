@@ -51,7 +51,7 @@ namespace finnfox.Models
         [StringLength(100, ErrorMessage = "{0} mora biti dugačka najmanje {2} slova.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Nova lozinka")]
-        [MembershipExtension
+        [MembershipChangePasswordExtension
             (
              MinRequiredPasswordLength = 6,
              MinNonAlphanumericCharactersError = "Nemate alfanumericke karaktere",
