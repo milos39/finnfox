@@ -13,9 +13,13 @@ app.controller('globalnaAnalitikaController', function ($scope, $http) {
         '#45c490',
         '#008d93',
         '#2e5468',
-        '#ffe900',
+        '#fff054',
         '#ff0039',
-        '#a1ff66'
+        '#729e7d',
+        '#ff8e72',
+        '#481d24',
+        '#4c243b',
+        '#54457f'
     ];
 
     function konvertorNizaMeseciUslova (nizBrojnihMeseci) {
