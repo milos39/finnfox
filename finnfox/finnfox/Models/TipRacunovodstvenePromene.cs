@@ -27,7 +27,7 @@ namespace finnfox
         [Display(Name ="Prihod/Rashod")]
         public bool PozitivnostTipa { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+       [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RacunovodstvenaPromena> RacunovodstvenaPromenas { get; set; }
     }
 }

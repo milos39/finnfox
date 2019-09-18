@@ -75,7 +75,7 @@ namespace finnfox.Controllers
         public ActionResult meseciZaGodinu(int godina)
         {
             var userId = User.Identity.GetUserId();
-            var meseci = db.RacunovodstvenaPromenas.Where(m => m.DatumPromene.Year == godina && m.ApplicationUserId == userId).Select(m => m.DatumPromene.Month).Distinct().ToList();
+            var meseci = db.RacunovodstvenaPromenas.Where(m => m.DatumPromene.Year == godina && m.ApplicationUserId == userId).Select(m => m.DatumPromene.Month).Distinct().OrderBy(m=>m).ToList();
             return Json(meseci, JsonRequestBehavior.AllowGet);
         }
 
@@ -83,7 +83,7 @@ namespace finnfox.Controllers
         [HttpGet]
         public ActionResult godineSviKorisnici ()
         {
-            return Json(db.RacunovodstvenaPromenas.Select(m => m.DatumPromene.Year).Distinct().ToList(), JsonRequestBehavior.AllowGet);
+            return Json(db.RacunovodstvenaPromenas.Select(m => m.DatumPromene.Year).Distinct().OrderBy(m => m).ToList(), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -92,7 +92,7 @@ namespace finnfox.Controllers
         {
 
             List<int> godine = db.RacunovodstvenaPromenas.Select(m => m.DatumPromene.Year).Distinct().ToList();
-            List<int> meseci = db.RacunovodstvenaPromenas.Select(m => m.DatumPromene.Month).Distinct().ToList();
+            List<int> meseci = db.RacunovodstvenaPromenas.Select(m => m.DatumPromene.Month).Distinct().OrderBy(m=>m).ToList();
             List<List<double>> listaVrednosti = new List<List<double>>();
             List<double> vrednosti;
 
@@ -162,7 +162,7 @@ namespace finnfox.Controllers
 
                 vrednosti = new List<double>();
 
-                bool flag = false;
+             //   bool flag = false;
                
                 foreach (var objekat in querryResult)
                 {
@@ -237,8 +237,8 @@ namespace finnfox.Controllers
 
 
                 viewModel.balans = pozitivno - negativno;
-                viewModel.godine = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.DatumPromene.Year).Distinct().ToList();
-                viewModel.meseciZaDatuGodinu = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina).Select(m => m.DatumPromene.Month).Distinct().ToList();
+                viewModel.godine = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select(m => m.DatumPromene.Year).Distinct().OrderBy(m=>m).ToList();
+                viewModel.meseciZaDatuGodinu = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId && m.DatumPromene.Year == godina).Select(m => m.DatumPromene.Month).Distinct().OrderBy(m=>m).ToList();
             }
            
 
@@ -298,7 +298,7 @@ namespace finnfox.Controllers
 
         //GET: RacunovodstvenaPromenas/godinaChart/godina
         [HttpGet]
-        public async Task<ActionResult> godinaChart (int godina)
+        public ActionResult godinaChart (int godina)
         {
             var userId = User.Identity.GetUserId();
 
@@ -433,7 +433,7 @@ namespace finnfox.Controllers
 
 
                 viewModel.balans = pozitivno - negativno;
-                viewModel.godine = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select( m => m.DatumPromene.Year).Distinct().ToList();
+                viewModel.godine = db.RacunovodstvenaPromenas.Where(m => m.ApplicationUserId == userId).Select( m => m.DatumPromene.Year).Distinct().OrderBy(m=>m).ToList();
             }
             else
             {
@@ -456,7 +456,7 @@ namespace finnfox.Controllers
                   
 
 
-                viewModel.godine = db.RacunovodstvenaPromenas.Where(m=>m.ApplicationUserId == userId).Select(m => m.DatumPromene.Year).Distinct().ToList();
+                viewModel.godine = db.RacunovodstvenaPromenas.Where(m=>m.ApplicationUserId == userId).Select(m => m.DatumPromene.Year).Distinct().OrderBy(m => m).ToList();
 
             }
            
@@ -533,7 +533,7 @@ namespace finnfox.Controllers
             {
                 ViewBag.TipPromeneId = new SelectList(db.TipRacunovodstvenePromenes, "TipPromeneId", "NazivTipa", racunovodstvenaPromena.TipPromeneId);
                 //return View(racunovodstvenaPromena);
-                //mozemo da ubacimo error stranicu ili nesto tako
+                
                 throw;
             }
 
@@ -598,10 +598,19 @@ namespace finnfox.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RacunovodstvenaPromena racunovodstvenaPromena = db.RacunovodstvenaPromenas.Find(id);
-            db.RacunovodstvenaPromenas.Remove(racunovodstvenaPromena);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                RacunovodstvenaPromena racunovodstvenaPromena = db.RacunovodstvenaPromenas.Find(id);
+                db.RacunovodstvenaPromenas.Remove(racunovodstvenaPromena);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         protected override void Dispose(bool disposing)

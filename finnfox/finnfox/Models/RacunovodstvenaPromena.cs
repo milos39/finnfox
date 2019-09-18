@@ -18,7 +18,7 @@ namespace finnfox
         [Required(ErrorMessage = "polje {0} je obavezno")]
         [StringLength(50)]
         [Display(Name = "Naziv promene")]
-
+         
         public string NazivPromene { get; set; }
 
         [Required(ErrorMessage = "polje {0} je obavezno")]
