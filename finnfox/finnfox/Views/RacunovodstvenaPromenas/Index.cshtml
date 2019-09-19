@@ -9,12 +9,6 @@
         <h2 id="godina-naslov">Kompletna finansijska istorija</h2>
         @Html.ActionLink("+ Kreiraj novu promenu", "Create", "RacunovodstvenaPromenas", null, htmlAttributes: new { @class = "btn btn-primary" })
 
-        @*<button class="btn btn-primary" id="updateTable">
-                update balans
-            </button>
-            <input type="number" id="godinaTest" />
-            <p id="balansDemo">{{ balans }}</p>*@
-
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="godineUsistemu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 godine
@@ -55,14 +49,6 @@
                     <th data-field="Id" data-sortable="false">akcije</th>
                 </tr>
             </thead>
-            @*<tbody>
-                    <tr ng-repeat="promena in promenePoGodini.racunovodstvenePromene">
-                        <td>{{promena.DatumPromene}}</td>
-                        <td>{{promena.TipRacunovodstvenePromene}}</td>
-                        <td>{{promena.NazivPromene}}</td>
-                        <td>{{promena.KolicinaNovca}}</td>
-                    </tr>
-                </tbody>*@
 
         </table>
 
@@ -79,18 +65,8 @@
 
     <script>
 
-        //function balanceColor(){
-        //    if ($(".balance")[0].innerHTML < 0) {
-        //    $(".balance").addClass("balance-negative");
-        //    } else {
-        //        $(".balance").addClass("balance-positive");
-        //    };
-        //};
-        //balanceColor();
-        
-        
-
         var myChart;
+
         function addData(chart, label, data) {
             chart.data.labels = label;
             chart.data.datasets[0].data = data;
@@ -140,22 +116,15 @@
 
 
         function drawOrUpdateChart(godina, mesec) {
-
             if (mesec === undefined || mesec == 0) {
-                //console.log("mesec je 0 ili undefined, da proverimo: " + mesec);
                 $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaChart?godina=" + godina, function (data, status) {
-                    //console.log(data);
-
                     if ($("#myChart").hasClass("chartjs-render-monitor")) {
                         myChart.destroy();
                     }
                     drawChart(data);
                 });
             } else {
-                //console.log("mesec je broj: " + mesec);
                 $.get("http://localhost:1091/RacunovodstvenaPromenas/godinaMesecChart?godina=" + godina + "&mesec=" + mesec, function (data, status) {
-                    //console.log(data);
-
                     if ($("#myChart").hasClass("chartjs-render-monitor")) {
                         myChart.destroy();
                     }
@@ -166,24 +135,6 @@
 
         };
 
-            //var niz = ["papaja_", "banana_", "mango_", "kivi_"];
-            //$("#nizDemo").html(niz);
-            //$("#updateTable").click(function () {
-            //    niz.splice($("#godinaTest").val(), 1);
-            //    $("#nizDemo").html(niz);
-
-
-            //});
-
-
-                //$("#promeneTabela").bootstrapTable({
-                //data-toggle: "table"
-                //locale: "hr-HR",
-                //data-search: "true",
-                //data-show-columns: "true"
-                //});
-                //$("#promeneTabela").bootstrapTable({});
-
     </script>
 
 
@@ -192,31 +143,6 @@
     @Scripts.Render("~/bundles/angular-racPromene")
     @Scripts.Render("~/bundles/bs-table")
     @Scripts.Render("~/bundles/chart")
-
-
-    @*<script>
-        var ctx = document.getElementById('myChart');
-            var myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: 'Udeo troškova u ukupnim primanjima',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: [
-                            '#0060df',
-                            '#ff9f40',
-                            '#ff6384',
-                            '#4bc0c0',
-                            '#ffe900',
-                            '#ff0039'
-                        ]
-                    }]
-                },
-                options: {
-                }
-            });
-        </script>*@
 
 }
 

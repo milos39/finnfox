@@ -1,9 +1,6 @@
 ﻿var app = angular.module("globalnaAnalitika", []);
 
 app.controller('globalnaAnalitikaController', function ($scope, $http) {
-    //$scope.submit = function (broj) {
-    //    alert(broj);
-    //};
 
     //STACKED BAR CHART
     var stackedBarChart;
@@ -62,11 +59,7 @@ app.controller('globalnaAnalitikaController', function ($scope, $http) {
         chart.update();
     };
 
-    function drawStackedChart(data) {
-        //console.log(data.data.meseci);
-        //console.log(data.data.kategorije);
-        //console.log(data.data.vrednostiPoKategoriji);
-        
+    function drawStackedChart(data) {       
         var stackedBarCanvas = document.getElementById('globalBarChartCanvas');
 
         stackedBarChart = new Chart(stackedBarCanvas, {
@@ -97,7 +90,6 @@ app.controller('globalnaAnalitikaController', function ($scope, $http) {
     });
 
     //LINE CHART
-
     function drawOrUpdateStackedLineChart() {
         $http.get("http://localhost:1091/RacunovodstvenaPromenas/globalniProcentiUstede").then(function (response) {
             console.log(response.data);
@@ -111,10 +103,6 @@ app.controller('globalnaAnalitikaController', function ($scope, $http) {
     drawOrUpdateStackedLineChart();
 
     function drawLineChart(data) {
-        //console.log(data.data.meseci);
-        //console.log(data.data.kategorije);
-        //console.log(data.data.vrednostiPoKategoriji);
-
         var stackedLineCanvas = document.getElementById('globalLineChartCanvas');
 
         stackedLineChart = new Chart(stackedLineCanvas, {
